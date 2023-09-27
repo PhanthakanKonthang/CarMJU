@@ -17,9 +17,9 @@
   <div class="footer">
     <table>
       <tr>
-        <td><img src="${pageContext.request.contextPath}/assets/img/facebook.png" alt="" width="50px" height="50px"></td>
-        <td><img src="${pageContext.request.contextPath}/assets/img/mail.png" alt="" width="50px" height="50px"></td>
-        <td><img src="${pageContext.request.contextPath}/assets/img/telephone.png" alt="" width="50px" height="50px"></td>
+        <td><img src="${pageContext.request.contextPath}/assets/img/facebook.png" alt="" width="40px" height="40px"></td>
+        <td><img src="${pageContext.request.contextPath}/assets/img/email.png" alt="" width="40px" height="40px"></td>
+        <td><img src="${pageContext.request.contextPath}/assets/img/telephone-call.png" alt="" width="40px" height="40px"></td>
       </tr>
       <tr>
         <td><p>Maejo University</p></td>

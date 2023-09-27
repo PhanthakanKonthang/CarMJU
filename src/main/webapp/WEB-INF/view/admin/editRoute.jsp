@@ -120,22 +120,7 @@
 
 
 <!-- footer -->
-<footer>
-    <div class="footer">
-        <table>
-            <tr>
-                <td><img src="${pageContext.request.contextPath}/assets/img/facebook.png" alt="" width="50px" height="50px"></td>
-                <td><img src="${pageContext.request.contextPath}/assets/img/mail.png" alt="" width="50px" height="50px"></td>
-                <td><img src="${pageContext.request.contextPath}/assets/img/telephone.png" alt="" width="50px" height="50px"></td>
-            </tr>
-            <tr>
-                <td><p>Maejo University</p></td>
-                <td><p>Maejo@mju.ac.th</p> </td>
-                <td><p>053-873000</p></td>
-            </tr>
-        </table>
-    </div>
-</footer>
+<jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>
 <!-- footer -->
 </body>
 
