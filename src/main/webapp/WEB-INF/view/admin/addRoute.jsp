@@ -88,7 +88,7 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="addDriver">
+<section class="CssSection">
 
     <form action="${pageContext.request.contextPath}/saveRoute" modelAttribute="route" method="POST" name="formAddRoute">
         <div class="add">

@@ -28,7 +28,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     @Transactional
-    public Driver getDriverById(String driverId) {
+    public Driver getDriverById(long driverId) {
         return driverDao.getDriverById(driverId);
     }
 
@@ -40,7 +40,7 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     @Transactional
-    public void deleteDriver(String driverId) {
+    public void deleteDriver(long driverId) {
         driverDao.deleteDriver(driverId);
     }
 }

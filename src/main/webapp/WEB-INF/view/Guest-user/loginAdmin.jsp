@@ -87,7 +87,7 @@
 <%-- Login --%>
 <section class="Login">
   <div class="login">
-    <p class="pHead">Login By Admin</p>
+    <p class="pHead">เข้าสู่ระบบ</p>
     <br>
     <form action="${pageContext.request.contextPath}/doLogin" method="POST">
       <table style="margin: 0 auto">

@@ -9,8 +9,10 @@ public interface DriverDao {
 
     void saveDriver(Driver driver);
 
-    Driver getDriverById(String driverId);
+    long getLatestId();
+
+    Driver getDriverById(long driverId);
     void updateDriver(Driver driver);
 
-    void deleteDriver(String driverId);
+    void deleteDriver(long driverId);
 }

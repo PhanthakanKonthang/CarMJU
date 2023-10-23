@@ -89,7 +89,7 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="addDriver">
+<section class="CssSection">
 
     <%--  <%Busstop busstop = (Busstop) request.getAttribute("busstop");%>--%>
     <%--  <%Route route = (Route) request.getAttribute("route");%>--%>
@@ -97,7 +97,7 @@
         <%Busstop busstop = (Busstop) request.getAttribute("busStop");%>
     <form action="${pageContext.request.contextPath}/${busStop.id_busstop}/updateBusStop"  method="POST" >
         <div class="add">
-            <p class="pAdd">เพิ่มจุดจอดรถ</p>
+            <p class="pAdd">แก้ไขจุดจอดรถ</p>
 
             <br>
             <table style="margin: 0 auto">

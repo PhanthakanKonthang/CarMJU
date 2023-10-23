@@ -68,14 +68,6 @@ public class RouteController {
     }
 
 
-    @RequestMapping("/route-listXX")
-    public String routeListPage(Model model, HttpServletRequest request) {
-        model.addAttribute("routes", routeService.getRoutes());
-        model.addAttribute("busstops", busstopService.getBusstops());
-//        request.
-        return "route-listXX";
-    }
-
     @RequestMapping("/list-route")
     public String ListRoutePage(Model model, HttpServletRequest request) {
         model.addAttribute("routespack", routeService.getRoutes());

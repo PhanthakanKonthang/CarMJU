@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
 
 
     <style>
-        .listHead{
+        .listHead {
             background: #ffa500;
             margin: 0 auto;
             padding: 10px;
@@ -33,22 +33,23 @@
             border-radius: 30px;
         }
 
-        .addButton{
+        .addButton {
             text-align: center;
         }
 
-        .addButton .AddBusStop{
-            width: 200px;
+        .addButton .AddDriver {
+            width: 65px;
+            height: 55px;
             background: #ffa500;
             border-radius: 20px;
             font-size: 16px;
             float: right;
-            margin-right: 80px;
+            margin-right: 95px;
             margin-bottom: 10px;
             transition-duration: 0.5s;
         }
 
-        .addButton .AddBusStop:hover{
+        .addButton .AddDriver:hover {
             background-color: #fffb00;
             color: rgb(0, 0, 0);
         }
@@ -96,47 +97,45 @@
         <p>รายการข้อมูลคนขับรถ</p>
     </div>
 
-<%--    <div>--%>
-<%--        <a href="${pageContext.request.contextPath}/addDriver"><button style="width: 80px; float: right; margin-right: 80px; background-color: #FFFFFF;margin-bottom: 10px">--%>
-<%--            <img src="${pageContext.request.contextPath}/assets/img/add.png" style="width: 30px; ">เพิ่มข้อมูลคนขับรถ</button></a>--%>
-<%--    </div>--%>
+    <%--    <div>--%>
+    <%--        <a href="${pageContext.request.contextPath}/addDriver"><button style="width: 80px; float: right; margin-right: 80px; background-color: #FFFFFF;margin-bottom: 10px">--%>
+    <%--            <img src="${pageContext.request.contextPath}/assets/img/add.png" style="width: 30px; ">เพิ่มข้อมูลคนขับรถ</button></a>--%>
+    <%--    </div>--%>
     <div class="addButton">
         <a href="${pageContext.request.contextPath}/addDriver">
-            <button type="button" class="AddBusStop">
-                <table>
-                    <tr>
-                        <td><img src="${pageContext.request.contextPath}/assets/img/add.png" style="width: 30px;"></td>
-                        <td>เพิ่มข้อมูลคนขับรถ</td>
-                    </tr>
-                </table>
+            <button type="button" class="AddDriver">
+                <img src="${pageContext.request.contextPath}/assets/img/driverAdd.png" style="width:40px;">
             </button>
         </a>
     </div>
 
-                <table >
-                    <tr>
-                        <th class="th">รหัสคนขับรถ</th>
-                        <th class="th">ชื่อ</th>
-                        <th class="th">นามสกุล</th>
-                        <th class="th">เบอรโทร</th>
-                        <th class="th">อีเมล</th>
-                        <th class="th">แก้ไข</th>
-                        <th class="th">ลบ</th>
-                    </tr>
-                    <c:forEach var="driver" items="${driversPack}">
-                        <tr class="blockDataDriver" >
-                            <td class="td">${driver.id_driver}</td>
-                            <td class="td">${driver.name_driver}</td>
-                            <td class="td">${driver.sername_driver}</td>
-                            <td class="td">${driver.tel_driver}</td>
-                            <td class="td">${driver.email_driver}</td>
+    <div>
+        <table>
+            <tr>
+                <th class="th">รหัสคนขับรถ</th>
+                <th class="th">ชื่อ</th>
+                <th class="th">นามสกุล</th>
+                <th class="th">เบอรโทร</th>
+                <th class="th">อีเมล</th>
+                <th class="th">แก้ไข</th>
+                <th class="th">ลบ</th>
+            </tr>
+            <c:forEach var="driver" items="${driversPack}">
+                <tr class="blockDataDriver">
+                    <td class="td">${driver.id_driver}</td>
+                    <td class="td">${driver.name_driver}</td>
+                    <td class="td">${driver.sername_driver}</td>
+                    <td class="td">${driver.tel_driver}</td>
+                    <td class="td">${driver.email_driver}</td>
 
-                            <td class="td"><a href="${pageContext.request.contextPath}/driver/${driver.id_driver}"><img src="${pageContext.request.contextPath}/assets/img/edit.png" style="width: 20px"></a></td>
-                            <td class="td"><a href="${pageContext.request.contextPath}/deleteDv/${driver.id_driver}"><img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>
-                        </tr>
-                    </c:forEach>
-                </table>
-
+                    <td class="td"><a href="${pageContext.request.contextPath}/driver/${driver.id_driver}"><img
+                            src="${pageContext.request.contextPath}/assets/img/edit.png" style="width: 20px"></a></td>
+                    <td class="td"><a href="${pageContext.request.contextPath}/deleteDriver/${driver.id_driver}"><img
+                            src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 </section>
 <%--  ListDriver --%>
 

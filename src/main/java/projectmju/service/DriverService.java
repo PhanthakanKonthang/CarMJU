@@ -9,9 +9,9 @@ public interface DriverService {
 
     void saveDriver(Driver driver);
 
-    Driver getDriverById(String driverId);
+    Driver getDriverById(long driverId);
     void updateDriver(Driver driver);
 
-    void deleteDriver(String driverId);
+    void deleteDriver(long driverId);
 
 }

@@ -23,41 +23,50 @@ public class DriverController {
     //Driver
     //Driver
     @RequestMapping("/addDriver")
-    public String addDriver(Model model){
+    public String addDriverPage (Model model){
         model.addAttribute("driver", new Driver());
         return "admin/addDriver";
     }
 
     @RequestMapping("/saveDriver")
-    public String saveDriver (Driver driver){
-        System.out.println(driver.getId_driver());
-        driverService.saveDriver(driver);
+    public String saveDriver (Driver driver, @RequestParam Map<String,String> params){
+        Driver driver1 = new Driver();
+        driver1.setId_driver(0);
+        driver1.setName_driver(params.get("name_driver"));
+        driver1.setSername_driver(params.get("sername_driver"));
+        driver1.setTel_driver(params.get("tel_driver"));
+        driver1.setEmail_driver(params.get("email_driver"));
+
+        driverService.saveDriver(driver1);
+        //System.out.println(route.getId_route());
         return "redirect:/driver-list";
     }
+
 
     @GetMapping("driver/{id}")
-    public String driverDetailEdit (@PathVariable("id") String driverId, Model model){
-        model.addAttribute("driver", driverService.getDriverById(driverId));
+    public String dv (@PathVariable("id") String driverId, Model model){
+        model.addAttribute("driver", driverService.getDriverById(Long.parseLong((driverId))));
         return "admin/editDriver";
     }
 
-    @PostMapping("/updateDv")
-    public String updateDriver (Driver driver){
-        driverService.updateDriver(driver);
+    @RequestMapping("updateDriver/{id}")
+    public String updateDriverPage (Driver driver, @RequestParam Map<String,String> params, @PathVariable("id") String driverId){
+        Driver driver1 = new Driver();
+        driver1.setId_driver(Long.parseLong(driverId));
+        driver1.setName_driver(params.get("name_driver"));
+        driver1.setSername_driver(params.get("sername_driver"));
+        driver1.setTel_driver(params.get("tel_driver"));
+        driver1.setEmail_driver(params.get("email_driver"));
+
+        driverService.saveDriver(driver1);
         return "redirect:/driver-list";
     }
 
-    @GetMapping("/deleteDv/{id}")
-    public String deleteDriver(@PathVariable("id") String driverId){
-        driverService.deleteDriver(driverId);
+    @GetMapping("deleteDriver/{id}")
+    public String deleteDriver (@PathVariable("id") String driverId){
+        driverService.deleteDriver(Long.parseLong(driverId));
         return "redirect:/driver-list";
     }
-
-    @RequestMapping("/editDriver")
-    public String editDriver(){
-        return "admin/editDriver";
-    }
-
     //Driver
     //Driver
     //Driver

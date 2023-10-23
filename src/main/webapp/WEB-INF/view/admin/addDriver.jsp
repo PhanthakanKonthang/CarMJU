@@ -19,18 +19,20 @@
     <link href="${pageContext.request.contextPath}/assets/css/indexes.css" rel="stylesheet">
 
     <style>
-        .add{
+        .add {
             background: #7DA17D;
             margin: 0 auto;
             padding: 2rem;
             width: 650px;
             border-radius: 30px;
         }
-        .icon{
+
+        .icon {
             width: 35px;
             height: 35px;
         }
-        .pAdd{
+
+        .pAdd {
             margin: 0 auto;
             background: #ffa500;
             text-align: center;
@@ -40,30 +42,35 @@
             font-weight: 500;
             border-radius: 30px;
         }
-        .Dsub{
+
+        .Dsub {
             align-items: center;
             text-align: center;
             padding: 15px;
         }
-        .sub{
+
+        .sub {
             padding: 10px;
             font-size: 18px;
             border-radius: 20px;
             cursor: pointer;
             background: #ffa500;
-            margin:  0 auto;
+            margin: 0 auto;
             align-items: center;
         }
-        .sub:hover{
+
+        .sub:hover {
             background-color: #fffb00; /* Green */
             color: rgb(0, 0, 0);
             transition-duration: 0.4s;
         }
+
         .ip {
             width: 220px;
             text-align: center;
             font-size: 18px;
-            border-radius: 15px;
+            border-radius: 10px;
+            margin-bottom: 5px;
         }
     </style>
 
@@ -88,45 +95,51 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="addDriver">
+<section class="CssSection">
 
-    <form:form action="${pageContext.request.contextPath}/saveDriver" modelAttribute="driver" method="POST" name="formAddDriver">
-    <div class="add">
-        <p class="pAdd">เพิ่มข้อมูลคนขับรถ</p>
-        <br>
-        <table style="margin: 0 auto">
+    <form:form action="${pageContext.request.contextPath}/saveDriver" modelAttribute="driver" method="POST"
+               name="formAddDriver">
+        <div class="add">
+            <p class="pAdd">เพิ่มข้อมูลคนขับรถ</p>
+            <br>
+            <table style="margin: 0 auto">
+                    <%--                <tr>--%>
+                    <%--                    <td><img src="${pageContext.request.contextPath}/assets/img/id.png" class="icon"></td>--%>
+                    <%--                    <td>รหัส</td>--%>
+                    <%--                    <td><input type="text" id="id_driver" name="id_driver" Class="ip"/></td>--%>
+                    <%--                </tr>--%>
                 <tr>
-                    <td><img src="${pageContext.request.contextPath}/assets/img/id.png" class="icon"></td>
-                    <td>รหัส</td>
-                    <td><form:input path="id_driver" cssClass="ip"/></td>
-                </tr>
-                <tr>
-                    <td><img src="${pageContext.request.contextPath}/assets/img/card.png" class="icon"></td>
+                        <%--                    <td><img src="${pageContext.request.contextPath}/assets/img/card.png" class="icon"></td>--%>
                     <td>ชื่อ</td>
-                    <td><form:input path="name_driver" cssClass="ip"/></td>
+                    <td><input type="text" id="name_driver" name="name_driver" Class="ip"/></td>
+
                     <td>นามสกุล</td>
-                    <td><form:input path="sername_driver" cssClass="ip"/></td>
+                    <td><input type="text" is="sername_driver" name="sername_driver" Class="ip"/></td>
                 </tr>
+
                 <tr>
-                    <td><img src="${pageContext.request.contextPath}/assets/img/call.png" class="icon"></td>
+                        <%--                    <td><img src="${pageContext.request.contextPath}/assets/img/call.png" class="icon"></td>--%>
                     <td>เบอร์โทร</td>
-                    <td><form:input path="tel_driver" cssClass="ip"/></td>
-                </tr>
-                <tr>
-                    <td><img src="${pageContext.request.contextPath}/assets/img/email.png" class="icon"></td>
+                    <td><input type="text" id="tel_driver" name="tel_driver" Class="ip"/></td>
                     <td>อีเมล</td>
-                    <td><form:input path="email_driver" cssClass="ip"/></td>
+                    <td><input type="text" id="email_driver" name="email_driver" Class="ip"/></td>
                 </tr>
-        </table>
-    </div>
 
-    <div class="Dsub">
-        <button type="submit" class="sub">ยืนยันการเพิ่ม</button>
-        <a href="${pageContext.request.contextPath}/driver-list"><button type="button" class="sub">ยกเลิก</button></a>
+                    <%--                    <td><img src="${pageContext.request.contextPath}/assets/img/emailb.png" class="icon"></td>--%>
 
-    </div>
 
-</form:form>
+            </table>
+        </div>
+
+        <div class="Dsub">
+            <button type="submit" class="sub">ยืนยันการเพิ่ม</button>
+            <a href="${pageContext.request.contextPath}/driver-list">
+                <button type="button" class="sub">ยกเลิก</button>
+            </a>
+
+        </div>
+
+    </form:form>
 </section>
 
 

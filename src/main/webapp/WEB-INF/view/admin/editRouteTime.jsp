@@ -20,18 +20,20 @@
     <link href="${pageContext.request.contextPath}/assets/css/indexes.css" rel="stylesheet">
 
     <style>
-        .add{
+        .add {
             background: #7DA17D;
             margin: 0 auto;
             padding: 2rem;
             width: 650px;
             border-radius: 30px;
         }
-        .icon{
+
+        .icon {
             width: 35px;
             height: 35px;
         }
-        .pAdd{
+
+        .pAdd {
             margin: 0 auto;
             background: #ffa500;
             text-align: center;
@@ -41,25 +43,29 @@
             font-weight: 500;
             border-radius: 30px;
         }
-        .Dsub{
+
+        .Dsub {
             align-items: center;
             text-align: center;
             padding: 15px;
         }
-        .sub{
+
+        .sub {
             padding: 10px;
             font-size: 18px;
             border-radius: 20px;
             cursor: pointer;
             background: #ffa500;
-            margin:  0 auto;
+            margin: 0 auto;
             align-items: center;
         }
-        .sub:hover{
+
+        .sub:hover {
             background-color: #fffb00; /* Green */
             color: rgb(0, 0, 0);
             transition-duration: 0.4s;
         }
+
         .ip {
             width: 220px;
             text-align: center;
@@ -83,16 +89,17 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="addDriver">
+<section class="CssSection">
+
 
     <%Busstop busstop = (Busstop) request.getAttribute("busstop");%>
     <%Route route = (Route) request.getAttribute("route");%>
 
-    <form action="${pageContext.request.contextPath}/${routeTime.round_no}/updateRouteTime"  method="POST" onsubmit="return validateForm()">
+    <form action="${pageContext.request.contextPath}/${routeTime.round_no}/updateRouteTime" method="POST"
+          onsubmit="return validateForm()">
         <%--  <form action="${pageContext.request.contextPath}/saveRouteTime/${id_route}"  method="POST">--%>
         <div class="add">
-            <p class="pAdd"></p>
-
+            <p class="pAdd">แก้ไขเวลาเริ่มเดินรถ</p>
             <br>
             <table style="margin: 0 auto">
 
@@ -108,7 +115,9 @@
 
         <div class="Dsub">
             <button type="submit" class="sub">ยืนยันการเพิ่ม</button>
-            <a href="${pageContext.request.contextPath}/viewRouteTime/${routeTime.route.id_route}"><button type="button" class="sub">ยกเลิก</button></a>
+            <a href="${pageContext.request.contextPath}/viewRouteTime/${routeTime.route.id_route}">
+                <button type="button" class="sub">ยกเลิก</button>
+            </a>
         </div>
     </form>
 

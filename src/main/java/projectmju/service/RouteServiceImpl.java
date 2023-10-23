@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import projectmju.dao.RouteDao;
+import projectmju.model.Busstop;
 import projectmju.model.Route;
+import projectmju.model.Routetimetable;
 
 import java.util.List;
 
@@ -53,4 +55,24 @@ public class RouteServiceImpl implements RouteService{
     public void deleteRoute(long routeId) {
         routeDao.deleteRoute(routeId);
     }
+
+
+    @Override
+    @Transactional
+    public List<Busstop> getSearchBusstop(long  id_route) {
+        return routeDao.getSearchBusstop(id_route);
+    }
+
+    @Override
+    @Transactional
+    public List<Routetimetable> getSearchRt(long id_route) {
+        return routeDao.getSearchRt(id_route);
+    }
+
+    @Override
+    @Transactional
+    public List<Busstop> getSearchBusstop2() {
+        return routeDao.getSearchBusstop2();
+    }
+
 }

@@ -80,12 +80,6 @@
     </div>
 </header>
 <!-- Navbar -->
-<%--<nav>--%>
-<%--    <ul>--%>
-<%--        <li><a href="home.jsp">หน้าหลัก</a></li>--%>
-<%--        <li><a href="viewRoute.jsp">เส้นทางเดินรถ</a></li>--%>
-<%--    </ul>--%>
-<%--</nav>--%>
 <jsp:include page="/WEB-INF/view/Guest-user/nav.jsp"/>
 <!-- Navbar -->
 

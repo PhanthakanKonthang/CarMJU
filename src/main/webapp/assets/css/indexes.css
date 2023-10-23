@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-
+/*@import url('https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Mali', cursive;
+    font-family: 'Kanit', sans-serif;
 }
 html{
     height: 100%;
@@ -129,9 +129,9 @@ nav ul li a:hover{
     align-items: center;
     flex: 1 0 auto;
 }
-.addDriver{
+.CssSection{
     background: #ffffff;
-    padding: 2rem;
+    padding: 5rem;
     align-items: center;
     flex: 1 0 auto;
 }
@@ -180,57 +180,57 @@ nav ul li a:hover{
 
 
 /* footer */
-footer{
-    background: #228B22;
-    color: aliceblue;
-    padding: 2rem;
-    text-align: center;
-    flex: 0 0 auto;
-}
+/*footer{*/
+/*    background: #228B22;*/
+/*    color: aliceblue;*/
+/*    padding: 2rem;*/
+/*    text-align: center;*/
+/*    flex: 0 0 auto;*/
+/*}*/
 
-.footer{
-    position: relative;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #228B22;
-    width: 100%;
-}
-footer div table tr td{
-    padding: 0px 100px;
-}
+/*.footer{*/
+/*    position: relative;*/
+/*    height: 20px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    background-color: #228B22;*/
+/*    width: 100%;*/
+/*}*/
+/*footer div table tr td{*/
+/*    padding: 0px 100px;*/
+/*}*/
 
-.face{
-    position: absolute;
-    left: 20%;
-}
-.tel{
-    position: absolute;
-    right: 20%;
-}
+/*.face{*/
+/*    position: absolute;*/
+/*    left: 20%;*/
+/*}*/
+/*.tel{*/
+/*    position: absolute;*/
+/*    right: 20%;*/
+/*}*/
 
-.face1{
-    position: absolute;
-    font-size: 25px;
-    top: 0;
-    left: 15%;
-}
-.mail1{
-    position: absolute;
-    font-size: 25px;
-    top: 0;
-}
-.tel1{
-    position: absolute;
-    font-size: 25px;
-    top: 0;
-    right: 16%;
-}
+/*.face1{*/
+/*    position: absolute;*/
+/*    font-size: 25px;*/
+/*    top: 0;*/
+/*    left: 15%;*/
+/*}*/
+/*.mail1{*/
+/*    position: absolute;*/
+/*    font-size: 25px;*/
+/*    top: 0;*/
+/*}*/
+/*.tel1{*/
+/*    position: absolute;*/
+/*    font-size: 25px;*/
+/*    top: 0;*/
+/*    right: 16%;*/
+/*}*/
 
-.face img, .mail1 img , .tel img,
-.face1 ,.mail1 ,.tel1{
-    object-fit: cover;
-    color: #ffffff;
-}
+/*.face img, .mail1 img , .tel img,*/
+/*.face1 ,.mail1 ,.tel1{*/
+/*    object-fit: cover;*/
+/*    color: #ffffff;*/
+/*}*/
 /* footer */

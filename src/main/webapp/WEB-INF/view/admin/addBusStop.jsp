@@ -89,7 +89,7 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="addDriver">
+<section class="CssSection">
 
 <%--  <%Busstop busstop = (Busstop) request.getAttribute("busstop");%>--%>
 <%--  <%Route route = (Route) request.getAttribute("route");%>--%>
@@ -115,10 +115,7 @@
     <div class="Dsub">
       <button type="submit" class="sub">ยืนยันการเพิ่ม</button>
       <a href="${pageContext.request.contextPath}/viewBusStopRoute/${id_route}"><button type="button" class="sub">ยกเลิก</button></a>
-        <%--        <button type="submit" class="sub">ยืนยันการเพิ่ม</button>--%>
-        <%--        <button type="reset" class="sub">ยกเลิก</button>--%>
-        <%--        <input type="submit" value="ยืนยันการเพิ่ม" class="sub">--%>
-        <%--        <input type="reset" value="ยกเลิก" class="sub">--%>
+
     </div>
 
   </form>

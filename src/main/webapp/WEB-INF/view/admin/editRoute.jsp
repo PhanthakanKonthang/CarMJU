@@ -82,7 +82,7 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="addDriver">
+<section class="CssSection">
 
 
     <%Route route = (Route) request.getAttribute("route");%>

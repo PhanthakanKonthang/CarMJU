@@ -68,12 +68,13 @@
             text-align: center;
         }
         .addButton .AddBusStop{
-            width: 150px;
+            width: 65px;
+            height: 55px;
             background: #ffa500;
             border-radius: 20px;
             font-size: 16px;
             float: right;
-            margin-right: 80px;
+            margin-right: 90px;
             margin-bottom: 10px;
             transition-duration: 0.5s;
         }
@@ -113,7 +114,7 @@
 <%--  ListRoute --%>
 <section class="routeList">
 
-    <%Route route = (Route) request.getAttribute("route");%>
+<%--    <%Route route = (Route) request.getAttribute("route");%>--%>
 
     <form action="${pageContext.request.contextPath}/viewRouteTime/${route.id_route}" modelAttribute="ViewRouteTime"
           method="get" name="formViewRouteTime">
@@ -140,12 +141,7 @@
         <div class="addButton">
             <a href="${pageContext.request.contextPath}/addRouteTime/${route.id_route}">
                 <button type="button" class="AddBusStop">
-                    <table>
-                        <tr>
-                            <td><img src="${pageContext.request.contextPath}/assets/img/add.png" style="width: 30px;"></td>
-                            <td>เพิ่มเวลาเริ่มเดินรถ</td>
-                        </tr>
-                    </table>
+                            <img src="${pageContext.request.contextPath}/assets/img/timeAdd.png" style="width: 40px;">
                 </button>
             </a>
         </div>
@@ -186,8 +182,9 @@
 </section>
 <%--  ListRoute --%>
 
+
+</body>
 <!-- footer -->
 <jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>
 <!-- footer -->
-</body>
 </html>

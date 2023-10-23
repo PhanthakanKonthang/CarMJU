@@ -65,6 +65,7 @@
       text-align: center;
       font-size: 18px;
       border-radius: 15px;
+      margin-bottom: 5px;
     }
   </style>
 
@@ -84,35 +85,30 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="editDriver">
+<section class="CssSection">
 
   <%Driver driver = (Driver) request.getAttribute("driver");%>
-<form:form action="${pageContext.request.contextPath}/updateDv" modelAttribute="driver" method="POST" name="formUpdateDriver">
+<form:form action="${pageContext.request.contextPath}/updateDriver/${driver.id_driver}" modelAttribute="driver" method="POST" name="formUpdateDriver">
   <div class="edit">
     <p class="pedit">แก้ไขข้อมูลคนขับรถ</p>
     <br>
     <table style="margin: 0 auto">
+                        <tr>
+          <td>รหัส</td>
+          <td><input type="text" id="id_driver" name="id_driver" readonly="true" value="<%=driver.getId_driver()%>" Class="ip"/></td>
+                        </tr>
       <tr>
-        <td><img src="${pageContext.request.contextPath}/assets/img/id.png" class="icon"></td>
-        <td>รหัส</td>
-        <td><form:input path="id_driver" readonly="true" cssClass="ip"/></td>
-      </tr>
-      <tr>
-        <td><img src="${pageContext.request.contextPath}/assets/img/card.png" class="icon"></td>
         <td>ชื่อ</td>
-        <td><form:input path="name_driver" cssClass="ip"/></td>
+        <td><input type="text" id="name_driver" name="name_driver" value="<%=driver.getName_driver()%>" Class="ip"/></td>
+
         <td>นามสกุล</td>
-        <td><form:input path="sername_driver" cssClass="ip"/></td>
+        <td><input type="text" is="sername_driver" name="sername_driver" value="<%=driver.getSername_driver()%>" Class="ip"/></td>
       </tr>
       <tr>
-        <td><img src="${pageContext.request.contextPath}/assets/img/call.png" class="icon"></td>
-        <td></td>
-        <td><form:input path="tel_driver" cssClass="ip"/></td>
-      </tr>
-      <tr>
-        <td><img src="${pageContext.request.contextPath}/assets/img/email.png" class="icon"></td>
-        <td></td>
-        <td><form:input path="email_driver" cssClass="ip" /></td>
+        <td>เบอร์โทร</td>
+        <td><input type="text" id="tel_driver" name="tel_driver" value="<%=driver.getTel_driver()%>" Class="ip"/></td>
+        <td>อีเมล</td>
+        <td><input type="text" id="email_driver" name="email_driver" value="<%=driver.getEmail_driver()%>" Class="ip"/></td>
       </tr>
     </table>
   </div>
@@ -120,9 +116,6 @@
   <div class="Dsub">
     <button type="submit" class="sub">ยืนยันการแก้ไข</button>
     <a href="${pageContext.request.contextPath}/driver-list"><button type="button" class="sub">ยกเลิก</button></a>
-<%--    <a href="${pageContext.request.contextPath}/deleteDv/${driver.id_driver}">ลบ</a>--%>
-    <%--        <input type="submit" value="ยืนยันการเพิ่ม" class="sub">--%>
-    <%--        <input type="reset" value="ยกเลิก" class="sub">--%>
   </div>
 
 </form:form>

@@ -83,7 +83,7 @@
 <!-- Navbar -->
 
 <%--  AddDriver --%>
-<section class="addDriver">
+<section class="CssSection">
 
     <%Busstop busstop = (Busstop) request.getAttribute("busstop");%>
     <%Route route = (Route) request.getAttribute("route");%>

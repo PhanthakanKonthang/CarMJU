@@ -41,23 +41,23 @@
         }
 
 
-        .tBusStop {
+        .taBusStopRoute {
             border-collapse: collapse;
             margin: 0 auto;
             width: 90%;
         }
 
-        .th, .td {
+        .thDataBusStopRoute, .tdDataBusStopRoute {
             text-align: left;
             padding: 8px;
         }
 
-        .th {
+        .thDataBusStopRoute {
             background-color: #7DA17D;
             color: white;
         }
 
-        .blockDataRoute:nth-child(even) {
+        .blockDataBusStopRoute:nth-child(even) {
             background-color: rgba(125, 161, 125, 0.18);
         }
 
@@ -78,12 +78,13 @@
         }
 
         .addButton .AddBusStop {
-            width: 150px;
+            width: 65px;
+            height: 55px;
             background: #ffa500;
             border-radius: 20px;
             font-size: 16px;
             float: right;
-            margin-right: 80px;
+            margin-right: 95px;
             margin-bottom: 10px;
             transition-duration: 0.5s;
         }
@@ -108,6 +109,9 @@
             color: rgb(0, 0, 0);
         }
 
+        footer{
+            color: white;
+        }
 
     </style>
 
@@ -155,28 +159,22 @@
         <div class="addButton">
             <a href="${pageContext.request.contextPath}/addBusStop/${route.id_route}">
                 <button type="button" class="AddBusStop">
-                    <table>
-                        <tr>
-                            <td><img src="${pageContext.request.contextPath}/assets/img/add.png" style="width: 30px;">
-                            </td>
-                            <td>เพิ่มจุดจอด</td>
-                        </tr>
-                    </table>
+                    <img src="${pageContext.request.contextPath}/assets/img/locationAdd.png" style="width: 35px;">
                 </button>
             </a>
         </div>
 
 
-        <div class="dBusStop">
-            <table class="tBusStop">
+        <div class="divBusStopRoute">
+            <table class="taBusStopRoute">
                 <tr>
-                    <th class="th">ลำดับจุดจอด</th>
-                    <th class="th">ชื่อจุดจอด</th>
-                    <th class="th"><img src="${pageContext.request.contextPath}/assets/img/clock.png" class="icon">
+                    <th class="thDataBusStopRoute">ลำดับจุดจอด</th>
+                    <th class="thDataBusStopRoute">ชื่อจุดจอด</th>
+                    <th class="thDataBusStopRoute"><img src="${pageContext.request.contextPath}/assets/img/clock.png" class="icon">
                         ระยะเวลา
                     </th>
-                    <th class="th">แก้ไข</th>
-                    <th class="th">ลบ</th>
+                    <th class="thDataBusStopRoute">แก้ไข</th>
+                    <th class="thDataBusStopRoute">ลบ</th>
                 </tr>
 
                 <!-- สร้างตัวแปรเพื่อเก็บค่าลำดับจุดจอด -->
@@ -186,26 +184,26 @@
                     <c:if test="${route.id_route == busStop.route.id_route}">
                         <!-- เพิ่มค่าลำดับจุดจอดขึ้นที่ละ 1 -->
                         <c:set var="busStopCounter" value="${busStopCounter + 1}" scope="page"/>
-                        <tr class="blockDataRoute">
+                        <tr class="blockDataBusStopRoute">
                             <!-- แสดงลำดับจุดจอดที่ -->
-                            <td class="td">
+                            <td class="tdDataBusStopRoute">
                                 <img src="${pageContext.request.contextPath}/assets/img/bus-stop.png" class="icon">
                                 จุดจอดที่ ${busStopCounter}
                             </td>
 
                             <!-- แสดงข้อมูลจุดจอดอื่น ๆ -->
-                            <td class="td">${busStop.name_busstop}</td>
-                            <td class="td">${busStop.spendingtime} นาที</td>
-                            <td class="td"><a
+                            <td class="tdDataBusStopRoute">${busStop.name_busstop}</td>
+                            <td class="tdDataBusStopRoute">${busStop.spendingtime} นาที</td>
+                            <td class="tdDataBusStopRoute"><a
                                     href="${pageContext.request.contextPath}/eDitBusStop/${busStop.id_busstop}"><img
                                     src="${pageContext.request.contextPath}/assets/img/edit.png"
                                     style="width: 20px"></a></td>
-                            <td class="td"><a
+                            <td class="tdDataBusStopRoute"><a
                                     href="${pageContext.request.contextPath}/${busStop.id_busstop}/deleteBusStop"><img
                                     src="${pageContext.request.contextPath}/assets/img/trash.png"
                                     style="width: 20px"></a></td>
                         </tr>
-                    </c:if>
+                        </c:if>
                 </c:forEach>
 
                 <%--            <c:forEach var="busStop" items="${busStops}" >--%>

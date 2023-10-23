@@ -1,31 +1,51 @@
 package projectmju.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 @Entity
 @Table(name="driver")
 public class Driver {
     @Id
-    @Column(name = "id_driver",nullable = false,length = 5)
-    private String id_driver;
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment" ,strategy = "increment")
+    private long id_driver;
 
-    @Column(name="name_driver",nullable = false,length = 100)
+    @Column(name = "name_driver", nullable = false, length = 100)
     private String name_driver;
 
-    @Column(name="sername_driver",nullable = false,length = 100)
+    @Column(name = "sername_driver", nullable = false, length = 100)
     private String sername_driver;
 
-    @Column(name="tel",nullable = false,length = 10)
+    @Column(name = "tel", nullable = false, length = 10)
     private String tel_driver;
 
-    @Column(name="email",nullable = false,length = 100)
+    @Column(name = "email", nullable = false, length = 100)
     private String email_driver;
 
-///////////////////////////////
-    public String getId_driver() {
+
+    ///////////////////////////////
+
+
+    public Driver() {
+    }
+
+    public Driver(long id_driver, String name_driver, String sername_driver, String tel_driver, String email_driver) {
+        this.id_driver = id_driver;
+        this.name_driver = name_driver;
+        this.sername_driver = sername_driver;
+        this.tel_driver = tel_driver;
+        this.email_driver = email_driver;
+    }
+
+    public long getId_driver() {
         return id_driver;
     }
 
-    public void setId_driver(String id_driver) {
+    public void setId_driver(long id_driver) {
         this.id_driver = id_driver;
     }
 

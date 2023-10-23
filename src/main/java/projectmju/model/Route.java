@@ -24,8 +24,6 @@ public class Route {
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Routetimetable> routetimetable = new HashSet<>();
 
-
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_route",nullable = false)
     private Set<Car> cars = new HashSet<>();

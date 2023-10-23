@@ -30,7 +30,15 @@ public class DriverDaoImpl implements DriverDao{
     }
 
     @Override
-    public Driver getDriverById(String driverId) {
+    public long getLatestId() {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Long> query = session.createQuery("SELECT COUNT(d) FROM Driver d", Long.class);
+        return query.getSingleResult();
+    }
+
+
+    @Override
+    public Driver getDriverById(long driverId) {
         Session session = sessionFactory.getCurrentSession();
         Query<Driver> query = session.createQuery("FROM Driver d WHERE d.id_driver =: dId", Driver.class);
         query.setParameter("dId", driverId);
@@ -44,7 +52,7 @@ public class DriverDaoImpl implements DriverDao{
     }
 
     @Override
-    public void deleteDriver(String driverId) {
+    public void deleteDriver(long driverId) {
         Session session = sessionFactory.getCurrentSession();
         Query<Driver> query = session.createQuery("FROM Driver d WHERE d.id_driver =: dId", Driver.class);
         query.setParameter("dId", driverId);

@@ -63,13 +63,13 @@
             height: auto;
         }
          .addButton button{
-            width: 230px;
-             height: 35px;
+            width: 65px;
+             height: 55px;
             background: #ffa500;
             border-radius: 20px;
             font-size: 16px;
             float: right;
-            margin-right: 80px;
+            margin-right: 95px;
             margin-bottom: 10px;
             transition-duration: 0.4s;
 
@@ -104,11 +104,7 @@
     <div class="addButton">
         <a href="${pageContext.request.contextPath}/addRoute">
             <button>
-                <table>
-                    <tr>
-                        <td><img src="${pageContext.request.contextPath}/assets/img/add.png" style="width: 30px; "></td>
-                        <td>เพิ่มเส้นทางการเดินรถ</td>
-                    </tr>
+                        <img src="${pageContext.request.contextPath}/assets/img/Adds.png" style="width: 30px; ">
                 </table>
 
 

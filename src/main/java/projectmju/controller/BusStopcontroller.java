@@ -25,7 +25,14 @@ public class BusStopcontroller {
     //BusStop BusStop BusStop BusStop BusStop BusStop BusStop BusStop
     //BusStop BusStop BusStop BusStop BusStop BusStop BusStop BusStop
     //BusStop BusStop BusStop BusStop BusStop BusStop BusStop BusStop
-
+//    @RequestMapping("viewBusStopRoute/{id}")
+//        public String viewBusStopRout (@PathVariable("id") String routeId,@RequestParam Map<String, String> allReqParams, Model model){
+//        int spendingTime = Integer.parseInt(allReqParams.get("spendingTime"));
+//
+//        Busstop busstop = new Busstop(spendingTime);
+//        busstopService.getBusstops(busstop);
+//        return "admin/viewBusStopRoute";
+//    }
     @RequestMapping("viewBusStopRoute/{id}")
     public String viewBusStopRoute (@PathVariable("id") String routeId, Model model){
         model.addAttribute("route", routeService.getRouteById(Long.parseLong(routeId)));
