@@ -46,6 +46,9 @@ public class HomeController {
         String destination = map.get("destination");
         System.out.println("Start point : " + start_point);
         System.out.println("Destination : " + destination);
+
+        List<Routetimetable> routeTimes = routeTimeService.getRoutetimetables();
+
         List<Route> routes = routeService.getRoutesByStartPointAndDestination(start_point, destination);
         model.addAttribute("start_point_name", start_point);
         model.addAttribute("destination_name", destination);
@@ -75,6 +78,7 @@ public class HomeController {
         //model.addAttribute("timemaps", timeMaps);
         model.addAttribute("routes", routes);
         model.addAttribute("routesTimeTable", routeTimeService.getRoutetimetables());
+        model.addAttribute("routeTime", routeTimes);
         return "Guest-user/home";
     }
 

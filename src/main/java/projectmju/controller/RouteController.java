@@ -57,7 +57,7 @@ public class RouteController {
     }
 
     @RequestMapping("/updateRoute/{id}")
-    public String updateRoutePage (Route route, @RequestParam Map<String,String> params, @PathVariable("id") String routeId) {
+    public String doUpdateRoute (Route route, @RequestParam Map<String,String> params, @PathVariable("id") String routeId) {
         Route route1 = new Route();
         route1.setId_route(Long.parseLong(routeId));
         route1.setName_route(params.get("nameRoute"));
@@ -75,7 +75,7 @@ public class RouteController {
 
 
     @RequestMapping("/list-route")
-    public String ListRoutePage(Model model) {
+    public String getListRoute(Model model) {
         model.addAttribute("routespack", routeService.getRoutes());
 //        model.addAttribute("carByIdRoute", carService.getCarByRouteId(Long.parseLong((routeId))));
         return "admin/list-route";

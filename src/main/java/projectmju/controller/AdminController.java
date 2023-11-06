@@ -91,7 +91,7 @@ public class AdminController {
 
 
     @RequestMapping("/driver-list")
-    public String driverPage(Model model, HttpSession session) {
+    public String getListDriver (Model model, HttpSession session) {
         if (session.getAttribute("admin") != null) {
             model.addAttribute("driversPack", driverService.getDrivers());
             return "admin/list-driver";
@@ -100,12 +100,6 @@ public class AdminController {
         }
     }
 
-//    @RequestMapping("/addbusstop")
-//    public String addBusStop (@RequestBody Map<String, String> map) {
-//        String test = map.get("busstopname");
-//        System.out.println("sdfsdf ");
-//        return "admin/driverList";
-//    }
 
 
 }

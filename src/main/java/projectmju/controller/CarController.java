@@ -25,7 +25,7 @@ public class CarController {
     private DriverService driverService;
 
     @GetMapping("/assignDriver/{id}")
-    public String carRoute(@PathVariable("id") String routeId, Model model) {
+    public String assign(@PathVariable("id") String routeId, Model model) {
         model.addAttribute("route", routeService.getRouteById(Long.parseLong(routeId)));
         model.addAttribute("carList", carService.getCars());
         model.addAttribute("driverList", driverService.getDriversNoCar());
@@ -33,7 +33,7 @@ public class CarController {
     }
 
     @PostMapping(path = "/saveCarRoute/{id}/update")
-    public String saveCarRoutePage(@RequestParam Map<String, String> allReqParams, HttpServletRequest request, @PathVariable long id) {
+    public String assignDriver(@RequestParam Map<String, String> allReqParams, HttpServletRequest request, @PathVariable long id) {
         Car car = carService.getCarById(allReqParams.get("selectCarRoute"));
         Route route = routeService.getRouteById(id);
         Driver driver = driverService.getDriverById(Long.parseLong(request.getParameter("selectDriver")));

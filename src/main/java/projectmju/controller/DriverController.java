@@ -50,7 +50,7 @@ public class DriverController {
     }
 
     @RequestMapping("updateDriver/{id}")
-    public String updateDriverPage (Driver driver, @RequestParam Map<String,String> params, @PathVariable("id") String driverId){
+    public String doUpdateDriver (Driver driver, @RequestParam Map<String,String> params, @PathVariable("id") String driverId){
         Driver driver1 = new Driver();
         driver1.setId_driver(Long.parseLong(driverId));
         driver1.setName_driver(params.get("name_driver"));

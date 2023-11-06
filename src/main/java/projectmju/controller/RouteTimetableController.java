@@ -25,7 +25,7 @@ public class RouteTimetableController {
     private RouteTimeService routeTimeService;
 
     @RequestMapping("viewRouteTime/{id}")
-    public String viewRouteTime(@PathVariable("id") String routeId, Model model) {
+    public String getListTimetable(@PathVariable("id") String routeId, Model model) {
         model.addAttribute("route", routeService.getRouteById(Long.parseLong(routeId)));
         model.addAttribute("routeTimeTable", routeTimeService.getRoutetimetables());
         return "admin/viewRouteTime";
@@ -67,7 +67,7 @@ public class RouteTimetableController {
     }
 
     @PostMapping(path = "/saveRouteTime/{id_route}")
-    public String saveRouteTime(@RequestParam Map<String, String> allReqParams, @PathVariable("id_route") long id_route) {
+    public String saveRouteTimeTable(@RequestParam Map<String, String> allReqParams, @PathVariable("id_route") long id_route) {
         String startTimeString = allReqParams.get("startTime");
 
         // ตรวจสอบรูปแบบเวลา "HH:mm"
@@ -139,7 +139,7 @@ public class RouteTimetableController {
 //        return "redirect:/viewRouteTime/" +routetimetable.getRoute().getId_route();
 //    }
 @PostMapping("/{round_no}/updateRouteTime")
-public String updateRouteTime(@RequestParam Map<String, String> allReqParams, @PathVariable long round_no) {
+public String updateTimeTable(@RequestParam Map<String, String> allReqParams, @PathVariable long round_no) {
     String startTimeString = allReqParams.get("startTime");
 
     // ตรวจสอบรูปแบบเวลา "HH:mm"
@@ -164,7 +164,7 @@ public String updateRouteTime(@RequestParam Map<String, String> allReqParams, @P
 
 
     @GetMapping("/{round_no}/deleteRouteTime")
-    public String doDeleteRouteTime(@PathVariable long round_no) {
+    public String deleteTimetable(@PathVariable long round_no) {
         Routetimetable routetimetable = routeTimeService.getRoutetimetableById(round_no);
         routeTimeService.deleteRoutetimetable(routetimetable);
 
