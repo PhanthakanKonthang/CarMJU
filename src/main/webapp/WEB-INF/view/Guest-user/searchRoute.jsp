@@ -1,3 +1,6 @@
+<%-- Import Java classes and set date format --%>
+<%@ page import="java.text.SimpleDateFormat" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="projectmju.model.Routetimetable" %>
@@ -5,7 +8,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Calendar" %>
-<%@ page import="projectmju.model.Route" %><%--
+<%@ page import="projectmju.model.Route" %>
+<%@ page import="java.util.*" %><%--
   Created by IntelliJ IDEA.
   User: Asus
   Date: 8/6/2566
@@ -43,26 +47,31 @@
 
 
         }
-
         .thData, .tdData {
             text-align: left;
             padding: 8px;
         }
 
         .thData {
-            background-color: #7DA17D;
+            background-color: #ffa500;
             color: white;
             text-align: center;
         }
-
         .blockDataRoute:nth-child(even) {
-            background-color: rgba(125, 161, 125, 0.18);
+            background-color: rgba(255, 165, 0, 0.21);
         }
-
         .dataBusAndRoute {
             border-collapse: collapse;
             margin: 0 auto;
             width: 80%;
+        }
+        .showRouteName{
+        text-align: center;
+        width: 350px;
+        background: #7DA17D;
+        margin: 20px auto;
+        padding: 10px;
+        border-radius: 25px;
         }
 
     </style>
@@ -82,7 +91,6 @@
 
 <section class="search">
     <form method="GET" action="${pageContext.request.contextPath}/searchRoute">
-        <%--<c:forEach var="route" items="${route}">--%>
         <table class="searchBox">
             <tr>
                 <td>
@@ -95,16 +103,71 @@
                     </select>
 
                 </td>
-<%--                <td style="padding-left: 10px">--%>
-<%--                    <button type="submit"--%>
-<%--                            style="width: 45px; height: 45px; line-height: 45px; align-items: center; background-color: black; border-radius: 50px; border: 3px solid orange">--%>
-<%--                        <i class="fa fa-search" style="color: white; font-size: 25px; cursor:pointer;"></i>--%>
-<%--                    </button>--%>
-<%--                </td>--%>
             </tr>
         </table>
-        <%--</c:forEach>--%>
     </form>
+
+<%--    <%--%>
+<%--        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");--%>
+
+<%--        List<Routetimetable> routetimetables = (List<Routetimetable>) request.getAttribute("routeTimeTable");--%>
+<%--        List<Busstop> busstops = (List<Busstop>) request.getAttribute("busstop");--%>
+<%--        List<Route> routes = (List<Route>) request.getAttribute("route");--%>
+
+<%--        Date roundOne = routetimetables.get(0).getStart_time();--%>
+<%--        Date roundTwo = routetimetables.get(1).getStart_time();--%>
+<%--        Date roundThree = routetimetables.get(2).getStart_time();--%>
+
+<%--        Calendar calendar1 = Calendar.getInstance();--%>
+<%--        Calendar calendar2 = Calendar.getInstance();--%>
+<%--        Calendar calendar3 = Calendar.getInstance();--%>
+
+<%--        System.out.println(routetimetables.size());--%>
+
+<%--    %>--%>
+
+<%--    <table class="dataBusAndRoute">--%>
+<%--        <thead>--%>
+<%--        <th class="thData" style="width: 130px">ลำดับจุดจอด</th>--%>
+<%--        <th class="thData">ชื่อจุดจอด</th>--%>
+<%--        <th class="thData">รอบที่ 1</th>--%>
+<%--        <th class="thData">รอบที่ 2</th>--%>
+<%--        <th class="thData">รอบที่ 3</th>--%>
+<%--        </thead>--%>
+<%--        <tbody>--%>
+<%--        <c:set var="busStopCounter" value="0" scope="page"/>--%>
+<%--        <% for (int i = 0; i < busstops.size(); i++) {--%>
+<%--            Busstop busStop = busstops.get(i);%>--%>
+
+
+<%--        <c:set var="busStopCounter" value="${busStopCounter + 1}" scope="page"/>--%>
+
+<%--        <tr class="blockDataRoute">--%>
+
+<%--            <td class="tdData">ลำดับ ${busStopCounter} </td>--%>
+<%--            <td class="tdData"><%= busStop.getName_busstop()%></td>--%>
+<%--            <% calendar1.setTime(roundOne);--%>
+<%--                calendar1.add(Calendar.MINUTE, busstops.get(i).getSpendingtime());--%>
+<%--                roundOne = calendar1.getTime();--%>
+<%--            %>--%>
+<%--            <td class="tdData"> <%=dateFormat.format(roundOne) %> </td>--%>
+
+<%--            <% calendar2.setTime(roundTwo);--%>
+<%--                calendar2.add(Calendar.MINUTE, busstops.get(i).getSpendingtime());--%>
+<%--                roundTwo = calendar2.getTime();--%>
+<%--            %>--%>
+<%--            <td class="tdData"> <%=dateFormat.format(roundTwo) %> </td>--%>
+
+<%--            <% calendar3.setTime(roundThree);--%>
+<%--                calendar3.add(Calendar.MINUTE, busstops.get(i).getSpendingtime());--%>
+<%--                roundThree = calendar3.getTime();--%>
+<%--            %>--%>
+<%--            <td class="tdData"> <%=dateFormat.format(roundThree) %></td>--%>
+<%--        </tr>--%>
+<%--        <%}%>--%>
+<%--        </tbody>--%>
+<%--    </table>--%>
+
 
 
     <%
@@ -114,60 +177,85 @@
         List<Busstop> busstops = (List<Busstop>) request.getAttribute("busstop");
         List<Route> routes = (List<Route>) request.getAttribute("route");
 
-        Date roundOne = routetimetables.get(0).getStart_time();
-        Date roundTwo = routetimetables.get(1).getStart_time();
-        Date roundThree = routetimetables.get(2).getStart_time();
+        // Check if routetimetables is not empty
+        if (routetimetables != null && !routetimetables.isEmpty()) {
+            int numberOfRounds = routetimetables.size();
 
-        Calendar calendar1 = Calendar.getInstance();
-        Calendar calendar2 = Calendar.getInstance();
-        Calendar calendar3 = Calendar.getInstance();
+            Calendar[] calendars = new Calendar[numberOfRounds];
+            Date[] rounds = new Date[numberOfRounds];
 
-        System.out.println(routetimetables.size());
+            // Initialize calendars and rounds
+            for (int i = 0; i < numberOfRounds; i++) {
+                calendars[i] = Calendar.getInstance();
+                rounds[i] = routetimetables.get(i).getStart_time();
+            }
 
     %>
 
+    <%--    แสดงชื่อเส้นทางที่เลือก     --%>
+    <div class="showRouteName">
+        <h3>
+        ชื่อเส้นทาง:
+        <c:choose>
+            <c:when test="${not empty param.id_route}">
+                <c:forEach var="route" items="${route}">
+                    <c:if test="${param.id_route eq route.id_route}">
+                        ${route.name_route}
+                    </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                เส้นสีแดง
+            </c:otherwise>
+        </c:choose>
+        </h3>
+    </div>
+
+<%--    แสดงชื่อเส้นทางที่เลือก     --%>
 
     <table class="dataBusAndRoute">
         <thead>
         <th class="thData" style="width: 130px">ลำดับจุดจอด</th>
         <th class="thData">ชื่อจุดจอด</th>
-        <th class="thData">รอบที่ 1</th>
-        <th class="thData">รอบที่ 2</th>
-        <th class="thData">รอบที่ 3</th>
+        <% for (int i = 0; i < numberOfRounds; i++) { %>
+        <th class="thData">รอบที่ <%= i + 1 %></th>
+        <% } %>
         </thead>
         <tbody>
         <c:set var="busStopCounter" value="0" scope="page"/>
-        <% for (int i = 0; i < busstops.size(); i++) {
-            Busstop busStop = busstops.get(i);%>
+        <%
+            for (int i = 0; i < busstops.size(); i++) {
+                Busstop busStop = busstops.get(i);
+        %>
 
         <c:set var="busStopCounter" value="${busStopCounter + 1}" scope="page"/>
 
         <tr class="blockDataRoute">
-
             <td class="tdData">ลำดับ ${busStopCounter} </td>
-            <td class="tdData"><%= busStop.getName_busstop()%></td>
-            <% calendar1.setTime(roundOne);
-                calendar1.add(Calendar.MINUTE, busstops.get(i).getSpendingtime());
-                roundOne = calendar1.getTime();
+            <td class="tdData"><%= busStop.getName_busstop() %></td>
+            <% for (int round = 0; round < numberOfRounds; round++) {
+                calendars[round].setTime(rounds[round]);
+                calendars[round].add(Calendar.MINUTE, busstops.get(i).getSpendingtime());
+                rounds[round] = calendars[round].getTime();
             %>
-            <td class="tdData"> <%=dateFormat.format(roundOne) %> </td>
-
-            <% calendar2.setTime(roundTwo);
-                calendar2.add(Calendar.MINUTE, busstops.get(i).getSpendingtime());
-                roundTwo = calendar2.getTime();
+            <td class="tdData"> <%= dateFormat.format(rounds[round]) %> </td>
+            <% } // End of round loop
             %>
-            <td class="tdData"> <%=dateFormat.format(roundTwo) %> </td>
-
-            <% calendar3.setTime(roundThree);
-                calendar3.add(Calendar.MINUTE, busstops.get(i).getSpendingtime());
-                roundThree = calendar3.getTime();
-            %>
-            <td class="tdData"> <%=dateFormat.format(roundThree) %></td>
         </tr>
-
-        <%}%>
+        <%
+            } // End of bus stop loop
+        %>
         </tbody>
     </table>
+
+    <%
+        } else {
+            // Handle the case where routetimetables is empty
+            System.out.println("No route timetables available.");
+        }
+    %>
+
+
 </section>
 
 <!-- footer -->

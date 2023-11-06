@@ -86,7 +86,7 @@
 
 
     <%Route route = (Route) request.getAttribute("route");%>
-    <form action="${pageContext.request.contextPath}/updateRoute/${route.id_route}" modelAttribute="route" method="POST" name="formUpdateRoute">
+    <form action="${pageContext.request.contextPath}/updateRoute/${route.id_route}" modelAttribute="route" method="POST" name="formUpdateRoute" onsubmit="return validateForm();">
         <div class="add">
             <p class="pAdd">แก้ไขข้อมูลเส้นทางการเดินรถ</p>
             <br>
@@ -109,12 +109,7 @@
         <div class="Dsub">
             <button type="submit" class="sub">ยืนยันการแก้ไข</button>
             <a href="${pageContext.request.contextPath}/list-route"><button type="button" class="sub">ยกเลิก</button></a>
-            <%--        <button type="submit" class="sub">ยืนยันการเพิ่ม</button>--%>
-            <%--        <button type="reset" class="sub">ยกเลิก</button>--%>
-            <%--        <input type="submit" value="ยืนยันการเพิ่ม" class="sub">--%>
-            <%--        <input type="reset" value="ยกเลิก" class="sub">--%>
         </div>
-
     </form>
 </section>
 
@@ -124,4 +119,38 @@
 <!-- footer -->
 </body>
 
+<script>
+    // เช็ค add nameRoute
+    // document.getElementById('nameRoute').addEventListener('input', function() {
+    //     let nameRoute = this.value;
+    //
+    // });
+
+    document.getElementById('nameRoute').addEventListener('input', function() {
+        let nameRoute = this.value;
+
+        // ตรวจสอบว่ามีจำนวนอักขระไม่น้อยกว่า 5 และไม่เกิน 100 ตัวอักษร
+        if (nameRoute.length < 2 || nameRoute.length > 100) {
+            this.setCustomValidity('ชื่อเส้นทางต้องมีความยาวระหว่าง 2 และ 100 ตัวอักษร');
+        } else if (nameRoute.trim() === '') {
+            this.setCustomValidity('ชื่อเส้นทางต้องไม่เป็นค่าว่าง');
+        } else if (!/^[ก-๏เ็ะโ-์]+$/.test(nameRoute)) {
+            this.setCustomValidity('ชื่อเส้นทางต้องประกอบด้วยภาษาไทยเท่านั้นและห้ามมีช่องว่าระหว่างตัวอักษร');
+        } else {
+            this.setCustomValidity(''); // ตัวอักษรถูกต้อง
+        }
+    });
+
+    function validateForm() {
+        const nameRoute = document.getElementById("nameRoute").value;
+
+
+        if (nameRoute === "" ) {
+            alert("กรุณากรอกข้อมูล");
+            return false; // ยกเลิกการส่งข้อมูล
+        }
+        return true; // ส่งข้อมูลเมื่อข้อมูลถูกต้อง
+    }
+
+</script>
 </html>

@@ -24,8 +24,8 @@ public class Route {
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Routetimetable> routetimetable = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_route",nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_route")
     private Set<Car> cars = new HashSet<>();
 
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -36,6 +36,7 @@ public class Route {
 
     public Route() {
     }
+
 
     public long getId_route() {
         return id_route;
@@ -76,6 +77,9 @@ public class Route {
     public void setBusstops(Set<Busstop> busstops) {
         this.busstops = busstops;
     }
+
+
+
 
     //    public Set<Busstop> getBusstops() {
 //        return busstops;

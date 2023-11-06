@@ -17,4 +17,11 @@ public interface BusstopDao {
     void updateBusstop(Busstop busstop);
 
     void deleteBusstop(Busstop busstop);
+
+    List<Busstop> getBusstopsByStartPointAndDestination (String startPoint, String destination);
+
+    List<Busstop> getBusstopsByRouteId (long routeId);
+
+    List<String> getListNameBusStop();
+
 }

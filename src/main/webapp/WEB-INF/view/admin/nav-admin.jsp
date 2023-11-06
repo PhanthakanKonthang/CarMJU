@@ -5,9 +5,9 @@
 
 <nav>
     <ul>
-            <li><a href="${pageContext.request.contextPath}/home-admin">หน้าหลัก</a></li>
-<%--        <security:authorize access="hasRole('MANAGER')">--%>
-            <li><a href="${pageContext.request.contextPath}/searchRoute-admin">เส้นทางการเดินรถ</a></li>
+<%--            <li><a href="${pageContext.request.contextPath}/home-admin">หน้าหลัก</a></li>--%>
+<%--&lt;%&ndash;        <security:authorize access="hasRole('MANAGER')">&ndash;%&gt;--%>
+<%--            <li><a href="${pageContext.request.contextPath}/searchRoute-admin">เส้นทางการเดินรถ</a></li>--%>
 <%--        </security:authorize>--%>
 
             <li><a href="${pageContext.request.contextPath}/driver-list">รายการข้อมูลคนขับรถ</a></li>

@@ -78,19 +78,13 @@
     </div>
 </header>
 <!-- Navbar -->
-<%--<nav>--%>
-<%--    <ul>--%>
-<%--        <li><a href="home.jsp">หน้าหลัก</a></li>--%>
-<%--        <li><a href="viewRoute.jsp">เส้นทางเดินรถ</a></li>--%>
-<%--    </ul>--%>
-<%--</nav>--%>
 <jsp:include page="/WEB-INF/view/admin/nav-admin.jsp"/>
 <!-- Navbar -->
 
-<%--  AddDriver --%>
+<%--  AddRoute --%>
 <section class="CssSection">
 
-    <form action="${pageContext.request.contextPath}/saveRoute" modelAttribute="route" method="POST" name="formAddRoute">
+    <form action="${pageContext.request.contextPath}/saveRoute" modelAttribute="route" method="POST" name="formAddRoute" onsubmit="return validateForm();">
         <div class="add">
             <p class="pAdd">เพิ่มข้อมูลเส้นทางการเดินรถ</p>
             <br>
@@ -109,7 +103,6 @@
             <button type="submit" class="sub">ยืนยันการเพิ่ม</button>
             <a href="${pageContext.request.contextPath}/list-route"><button type="button" class="sub">ยกเลิก</button></a>
         </div>
-
     </form>
 </section>
 
@@ -118,5 +111,40 @@
 <jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>
 <!-- footer -->
 </body>
+
+<script>
+    // เช็ค add nameRoute
+    // document.getElementById('nameRoute').addEventListener('input', function() {
+    //     let nameRoute = this.value;
+    //
+    // });
+
+    document.getElementById('nameRoute').addEventListener('input', function() {
+        let nameRoute = this.value;
+
+        // ตรวจสอบว่ามีจำนวนอักขระไม่น้อยกว่า 5 และไม่เกิน 100 ตัวอักษร
+        if (nameRoute.length < 2 || nameRoute.length > 100) {
+            this.setCustomValidity('ชื่อเส้นทางต้องมีความยาวระหว่าง 2 และ 100 ตัวอักษร');
+        } else if (nameRoute.trim() === '') {
+            this.setCustomValidity('ชื่อเส้นทางต้องไม่เป็นค่าว่าง');
+        } else if (!/^[ก-๏เ็ะโ-์]+$/.test(nameRoute)) {
+            this.setCustomValidity('ชื่อเส้นทางต้องประกอบด้วยภาษาไทยเท่านั้นและห้ามมีช่องว่าระหว่างตัวอักษร');
+        } else {
+            this.setCustomValidity(''); // ตัวอักษรถูกต้อง
+        }
+    });
+
+    function validateForm() {
+        const nameRoute = document.getElementById("nameRoute").value;
+
+
+        if (nameRoute === "" ) {
+            alert("กรุณากรอกข้อมูล");
+            return false; // ยกเลิกการส่งข้อมูล
+        }
+        return true; // ส่งข้อมูลเมื่อข้อมูลถูกต้อง
+    }
+
+</script>
 
 </html>

@@ -24,4 +24,6 @@ public interface RouteService {
 
     List<Busstop> getSearchBusstop2();
 
+    List<Route> getRoutesByStartPointAndDestination(String startPoint, String destination);
+
 }

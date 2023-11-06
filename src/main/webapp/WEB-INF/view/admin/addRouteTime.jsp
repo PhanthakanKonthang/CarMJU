@@ -66,6 +66,12 @@
       font-size: 18px;
       border-radius: 15px;
     }
+    .ipStartTime {
+      width: 150px;
+      text-align: center;
+      font-size: 18px;
+      border-radius: 15px;
+    }
   </style>
 
 </head>
@@ -97,10 +103,18 @@
       <table style="margin: 0 auto">
 
         <tr>
-          <td><img src="${pageContext.request.contextPath}/assets/img/bus-stop.png" class="icon"></td>
-          <td><input type="time" name="startTime" id="startTime" /></td>
           <td><img src="${pageContext.request.contextPath}/assets/img/clock.png" class="icon"></td>
-          <td><input type="text" name="status" id="status" class="ip"/></td>
+          <td>เวลาเริ่ม</td>
+          <td><input type="time" name="startTime" id="startTime" class="ipStartTime"/></td>
+          <td style="width: 30px"></td>
+
+          <td>สถานะ</td>
+          <td>
+          <select class="ip" id="status" name="status" >
+            <option value="เปิดใช้งาน">เปิดใช้งาน</option>
+            <option value="ปิดใช้งาน">ปิดใช้งาน</option>
+          </select>
+          </td>
         </tr>
 
       </table>
@@ -111,7 +125,6 @@
       <a href="${pageContext.request.contextPath}/viewRouteTime/${id_route}"><button type="button" class="sub">ยกเลิก</button></a>
     </div>
   </form>
-
 
 <%--    <form action="${pageContext.request.contextPath}/saveRouteTime/${id_route}" method="POST" onsubmit="return validateForm()">--%>
 <%--      <div class="add">--%>
@@ -158,18 +171,60 @@
 <!-- footer -->
 </body>
 
+<script>
+
+    //เช็ค startTime
+    document.getElementById('startTime').addEventListener('input', function() {
+        let startTime = this.value;
+
+        if (startTime === '') {
+            // 1. ห้ามเป็นค่าว่าง
+            this.setCustomValidity('กรุณากรอกเวลา');
+        } else if (!isValidTime(startTime)) {
+            // 2. อยู่ในรูปแบบของเวลา type="time" เท่านั้น
+            this.setCustomValidity('กรุณากรอกเวลาให้ถูกต้องและต้องอยู่ในช่วง 08:00 น. ถึง 16:00 น.');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    function isValidTime(time) {
+        // ตรวจสอบว่าเวลาถูกต้องตามรูปแบบ type="time" (HH:MM)
+        const timePattern = /^(0[8-9]|1[0-5]):[0-5][0-9]$/;
+        return timePattern.test(time);
+    }
+    // function isValidTime(time) {
+    //     // ตรวจสอบว่าเวลาถูกต้องตามรูปแบบ type="time" (HH:MM)
+    //     const timePattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+    //     return timePattern.test(time);
+    // }
+    //เช็ค startTime
+
+    //เช็ค status
+    document.getElementById('status').addEventListener('input', function() {
+        let status = this.value;
+
+        if (status === '') {
+            // ห้ามเป็นค่าว่าง
+            this.setCustomValidity('กรุณาเลือกสถานะ');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+
+    function validateForm() {
+        var startTime = document.getElementById("startTime").value;
+        var status = document.getElementById("status").value;
+
+        if (startTime === "" || status === "") {
+            alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+            return false; // ไม่ส่งฟอร์มไปยังเซิร์ฟเวอร์
+        }
+        // ถ้าข้อมูลถูกต้อง ส่งฟอร์มไปยังเซิร์ฟเวอร์
+        return true;
+    }
+</script>
+
 </html>
 
-<script>
-  function validateForm() {
-    var startTime = document.getElementById("startTime").value;
-    var status = document.getElementById("status").value;
-
-    if (startTime === "" || status === "") {
-      alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
-      return false; // ไม่ส่งฟอร์มไปยังเซิร์ฟเวอร์
-    }
-    // ถ้าข้อมูลถูกต้อง ส่งฟอร์มไปยังเซิร์ฟเวอร์
-    return true;
-  }
-</script>

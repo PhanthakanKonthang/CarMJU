@@ -12,14 +12,12 @@ import projectmju.service.RouteService;
 import java.util.Map;
 
 @Controller
-public class BusStopcontroller {
+public class BusStopController {
 
     @Autowired
     private RouteService routeService;
     @Autowired
     private BusstopService busstopService;
-
-
 
 
     //BusStop BusStop BusStop BusStop BusStop BusStop BusStop BusStop
@@ -40,10 +38,11 @@ public class BusStopcontroller {
         return "admin/viewBusStopRoute";
     }
 
-
     @RequestMapping("/addBusStop/{id_route}")
     public String addBusStop(Model model, @PathVariable("id_route") long id_route){
         model.addAttribute("id_route",id_route);
+        model.addAttribute("route",routeService.getRoutes());
+        model.addAttribute("bus",busstopService.getBusstopsByRouteId(id_route));
 
         return "admin/addBusStop";
     }
@@ -104,9 +103,6 @@ public class BusStopcontroller {
         busstopService.deleteBusstop(busstop);
         return "redirect:/viewBusStopRoute/"+busstop.getRoute().getId_route();
     }
-
-
-
 
     //BusStop BusStop BusStop BusStop BusStop BusStop BusStop BusStop
     //BusStop BusStop BusStop BusStop BusStop BusStop BusStop BusStop

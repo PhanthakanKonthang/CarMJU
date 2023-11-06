@@ -8,7 +8,10 @@ import projectmju.dao.RouteDao;
 import projectmju.model.Busstop;
 import projectmju.model.Route;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BusstopServiceImpl implements BusstopService{
@@ -16,10 +19,19 @@ public class BusstopServiceImpl implements BusstopService{
     @Autowired
     private BusstopDao busstopDao;
 
+    @Autowired
+    private RouteDao routeDao;
+
     @Override
     @Transactional
     public List<Busstop> getBusstops() {
         return busstopDao.getBusstops();
+    }
+
+    @Override
+    @Transactional
+    public List<Busstop> getBusstopsByRouteId(long routeId) {
+        return busstopDao.getBusstopsByRouteId(routeId);
     }
 
 
@@ -47,5 +59,11 @@ public class BusstopServiceImpl implements BusstopService{
     @Transactional
     public void deleteBusstop(Busstop busstop) {
         busstopDao.deleteBusstop(busstop);
+    }
+
+    @Override
+    @Transactional
+    public List<String> getListNameBusStop() {
+        return busstopDao.getListNameBusStop();
     }
 }

@@ -66,14 +66,8 @@
     <p class="text">รถเขียว M J U</p>
   </div>
 </header>
-<!-- Navbar -->
 <%--<nav>--%>
-<%--  <ul>--%>
-<%--    <li><a href="home.jsp">หน้าหลัก</a></li>--%>
-<%--    <li><a href="viewRoute.jsp">เส้นทางเดินรถ</a></li>--%>
 <jsp:include page="/WEB-INF/view/Guest-user/nav.jsp"/>
-<%--  </ul>--%>
-<%--</nav>--%>
 
   <c:set var="loginStatus" scope="session" value="${loginFailed}"/>
   <c:if test="${loginStatus == true && loginStatus != null}">
@@ -97,7 +91,7 @@
         </tr>
         <tr>
           <td><img class="padlock" src="${pageContext.request.contextPath}/assets/img/padlock.png"></td>
-          <td style="padding-left: 10px"><input type="text" name="password" id="password" placeholder="Password" required class="pass"></td>
+          <td style="padding-left: 10px"><input type="password" name="password" id="password" placeholder="Password" required class="pass"></td>
         </tr>
       </table>
       <br>
@@ -111,5 +105,78 @@
 <jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>
 <!-- footer -->
 </body>
+
+<script>
+  // document.getElementById('username').addEventListener('input', function () {
+  //   // รับค่าจาก input
+  //   let username = this.value;
+  //
+  //   // ตรวจสอบว่าชื่อผู้ใช้ประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น
+  //   if (/^[a-zA-Z0-9]+$/.test(username)) {
+  //     // ถ้าถูกต้อง
+  //     this.setCustomValidity('');
+  //   } else {
+  //     // ถ้าไม่ถูกต้อง
+  //     this.setCustomValidity('ชื่อผู้ใช้ต้องประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น');
+  //   }
+  // });
+
+  document.getElementById('username').addEventListener('input', function () {
+    // รับค่าจาก input
+    let username = this.value;
+
+    // ตรวจสอบว่าชื่อผู้ใช้ประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น
+    if (/^[a-zA-Z0-9]+$/.test(username)) {
+      // ตรวจสอบว่าจำนวนตัวอักษรอยู่ระหว่าง 5 ถึง 50 ตัว
+      if (username.length >= 3 && username.length <= 50) {
+        // ถ้าถูกต้อง
+        this.setCustomValidity('');
+      } else {
+        // ถ้าไม่ถูกต้องในเรื่องของจำนวนตัวอักษร
+        this.setCustomValidity('ชื่อผู้ใช้ต้องมีจำนวนตัวอักษรระหว่าง 5 ถึง 50 ตัว');
+      }
+    } else {
+      // ถ้าชื่อผู้ใช้ไม่ประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น
+      this.setCustomValidity('ชื่อผู้ใช้ต้องประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น');
+    }
+  });
+
+
+  // // เพิ่มคำสั่งตรวจสอบรหัสผ่าน
+  // document.getElementById('password').addEventListener('input', function () {
+  //   // รับค่าจาก input
+  //   let password = this.value;
+  //
+  //   // ตรวจสอบว่ารหัสผ่านประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น
+  //   if (/^[a-zA-Z0-9]+$/.test(password)) {
+  //     // ถ้าถูกต้อง
+  //     this.setCustomValidity('');
+  //   } else {
+  //     // ถ้าไม่ถูกต้อง
+  //     this.setCustomValidity('รหัสผ่านต้องประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น');
+  //   }
+  // });
+  document.getElementById('password').addEventListener('input', function () {
+    // รับค่าจาก input
+    let password = this.value;
+
+    // ตรวจสอบว่ารหัสผ่านประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น
+    if (/^[a-zA-Z0-9]+$/.test(password)) {
+      // ตรวจสอบจำนวนอักขระ (8-20 ตัวอักษร)
+      if (password.length >= 6 && password.length <= 20) {
+        // ถ้าถูกต้อง
+        this.setCustomValidity('');
+      } else {
+        // ถ้าไม่ถูกต้อง
+        this.setCustomValidity('รหัสผ่านต้องประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น และจำนวนอักขระต้องอยู่ระหว่าง 8 ถึง 20 ตัวอักษร');
+      }
+    } else {
+      // ถ้าไม่ถูกต้อง
+      this.setCustomValidity('โปรดใส่รหัสผ่าน รหัสผ่านต้องประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น');
+    }
+  });
+
+
+</script>
 
 </html>

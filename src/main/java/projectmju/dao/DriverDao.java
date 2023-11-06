@@ -15,4 +15,5 @@ public interface DriverDao {
     void updateDriver(Driver driver);
 
     void deleteDriver(long driverId);
+    List<Driver> getDriversNoCar();
 }

@@ -150,21 +150,34 @@
         <div class="dBusStop">
             <table class="tBusStop">
                 <tr>
-                    <th class="th">เวลา</th>
+                    <th class="th">รอบ</th>
+                    <th class="th">เวลาเริ่ม</th>
                     <th class="th">สถานะ</th>
                     <th class="th">แก้ไข</th>
                     <th class="th">ลบ</th>
 
                 </tr>
 
-                <c:forEach var="routeTime" items="${routeTimeTable}" >
+                <!-- สร้างตัวแปรเพื่อเก็บค่าลำดับรอบ -->
+                <c:set var="roundCounter" value="0" scope="page"/>
+
+                <c:forEach var="routeTime" items="${routeTimeTable}">
                     <c:if test="${route.id_route == routeTime.route.id_route}">
+
+                        <!-- เพิ่มค่าลำดับรอบขึ้นที่ละ 1 -->
+                        <c:set var="roundCounter" value="${roundCounter + 1}" scope="page"/>
+
                         <tr class="blockDataRoute">
-                            <td class="td"><fmt:formatDate value="${routeTime.start_time}" pattern="HH:mm" /> </td>
+                            <td class="td">รอบที่ ${roundCounter}</td>
+                            <td class="td"><fmt:formatDate value="${routeTime.start_time}" pattern="HH:mm" /> น.</td>
                             <td class="td">${routeTime.status} </td>
                             <td class="td"><a href="${pageContext.request.contextPath}/eDitRouteTime/${routeTime.round_no}"><img src="${pageContext.request.contextPath}/assets/img/edit.png" style="width: 20px"></a></td>
-                            <td class="td"><a href="${pageContext.request.contextPath}/${routeTime.round_no}/deleteRouteTime"><img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>
-
+                            <td class="td"><a href="${pageContext.request.contextPath}/${routeTime.round_no}/deleteRouteTime"
+                                              onclick="if(!(confirm('ต้องการลบรอบเดินรถเวลา'+ ' ' +'<fmt:formatDate value="${routeTime.start_time}" pattern="HH:mm" />' + 'น.'
+                                                      + ' ' + 'ของ'+ ' ' + '${routeTime.route.name_route}' +' ' +'ใช่หรือไม่'))) return false">
+                                <img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px">
+                            </a>
+                            </td>
                         </tr>
                     </c:if>
                 </c:forEach>

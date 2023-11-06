@@ -198,26 +198,17 @@
                                     href="${pageContext.request.contextPath}/eDitBusStop/${busStop.id_busstop}"><img
                                     src="${pageContext.request.contextPath}/assets/img/edit.png"
                                     style="width: 20px"></a></td>
-                            <td class="tdDataBusStopRoute"><a
-                                    href="${pageContext.request.contextPath}/${busStop.id_busstop}/deleteBusStop"><img
-                                    src="${pageContext.request.contextPath}/assets/img/trash.png"
-                                    style="width: 20px"></a></td>
+
+                            <td class="tdDataBusStopRoute">
+                                <a href="${pageContext.request.contextPath}/${busStop.id_busstop}/deleteBusStop"
+                                   onclick="if(!(confirm('ต้องการลบจุดจอด'+ ' ' +'${busStop.name_busstop}' + ' ' + 'ของ'+ ' ' + '${busStop.route.name_route}' +' ' +'ใช่หรือไม่'))) return false">
+                                <img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px">
+                                </a>
+                            </td>
                         </tr>
                         </c:if>
                 </c:forEach>
 
-                <%--            <c:forEach var="busStop" items="${busStops}" >--%>
-                <%--                <c:if test="${route.id_route == busStop.route.id_route}">--%>
-                <%--                    <tr class="blockDataRoute">--%>
-                <%--                        <td class="td"><img src="${pageContext.request.contextPath}/assets/img/bus-stop.png" class="icon">จุดจอดที่ </td>--%>
-                <%--                        <td class="td">${busStop.name_busstop}</td>--%>
-                <%--                        <td class="td">${busStop.spendingtime} นาที</td>--%>
-                <%--                        <td class="td"><a href="${pageContext.request.contextPath}/eDitBusStop/${busStop.id_busstop}"><img src="${pageContext.request.contextPath}/assets/img/edit.png" style="width: 20px"></a></td>--%>
-                <%--                        <td class="td"><a href="${pageContext.request.contextPath}/${busStop.id_busstop}/deleteBusStop"><img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>--%>
-                <%--                    </tr>--%>
-                <%--                </c:if>--%>
-
-                <%--            </c:forEach>--%>
             </table>
         </div>
 

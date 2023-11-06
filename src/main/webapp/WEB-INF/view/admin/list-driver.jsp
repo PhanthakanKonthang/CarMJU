@@ -94,7 +94,7 @@
 <%--  ListDriver --%>
 <section class="driverList">
     <div class="listHead">
-        <p>รายการข้อมูลคนขับรถ</p>
+        <p>รายการมอบหมายคนขับรถ</p>
     </div>
 
     <%--    <div>--%>
@@ -130,8 +130,11 @@
 
                     <td class="td"><a href="${pageContext.request.contextPath}/driver/${driver.id_driver}"><img
                             src="${pageContext.request.contextPath}/assets/img/edit.png" style="width: 20px"></a></td>
-                    <td class="td"><a href="${pageContext.request.contextPath}/deleteDriver/${driver.id_driver}"><img
-                            src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>
+
+                    <td class="td">
+                        <a href="${pageContext.request.contextPath}/deleteDriver/${driver.id_driver}"
+                                      onclick="if(!(confirm('ต้องการลบข้อมูลของ'+ ' ' +'${driver.name_driver}'+ ' ' +'${driver.sername_driver}'+ ' ' +'ใช่หรือไม่'))) return false">
+                        <img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>
                 </tr>
             </c:forEach>
         </table>

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import projectmju.model.Admin;
 import projectmju.service.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -70,13 +69,13 @@ public class AdminController {
     }
 
     @PostMapping("/doLogin")
-    public String doLogin(@RequestParam Map<String, String> map, Model model, HttpSession session) {
+    public String doLoginByAdmin(@RequestParam Map<String, String> map, Model model, HttpSession session) {
         String username = map.get("username");
         String password = map.get("password");
         Admin admin = adminService.adminLogin(username, password);
         if (admin != null) {
             session.setAttribute("admin", admin);
-            session.setMaxInactiveInterval(60 * 5);
+            session.setMaxInactiveInterval(60 * 10);
             return "redirect:/driver-list";
         } else {
             model.addAttribute("loginFailed", true);
@@ -95,7 +94,7 @@ public class AdminController {
     public String driverPage(Model model, HttpSession session) {
         if (session.getAttribute("admin") != null) {
             model.addAttribute("driversPack", driverService.getDrivers());
-            return "admin/driverList";
+            return "admin/list-driver";
         } else {
             return "Guest-user/loginAdmin";
         }

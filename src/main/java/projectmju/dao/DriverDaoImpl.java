@@ -59,4 +59,12 @@ public class DriverDaoImpl implements DriverDao{
         Driver driver = query.getSingleResult();
         session.remove(driver);
     }
+
+    @Override
+    public List<Driver> getDriversNoCar() {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Driver> query = session.createQuery("SELECT d FROM Driver d LEFT JOIN Car c ON d.id_driver = c.driver.id WHERE c.driver.id IS NULL", Driver.class);
+        List<Driver> drivers = query.getResultList();
+        return drivers;
+    }
 }

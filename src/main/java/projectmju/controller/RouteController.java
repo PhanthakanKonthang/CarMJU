@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import projectmju.model.Route;
 import projectmju.service.BusstopService;
+import projectmju.service.CarService;
+import projectmju.service.DriverService;
 import projectmju.service.RouteService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,10 @@ public class RouteController {
     private RouteService routeService;
     @Autowired
     private BusstopService busstopService;
+    @Autowired
+    private CarService carService;
+    @Autowired
+    private DriverService driverService;
 
     // Route Route Route Route Route Route Route Route Route
     // Route Route Route Route Route Route Route Route Route
@@ -69,11 +75,23 @@ public class RouteController {
 
 
     @RequestMapping("/list-route")
-    public String ListRoutePage(Model model, HttpServletRequest request) {
+    public String ListRoutePage(Model model) {
         model.addAttribute("routespack", routeService.getRoutes());
-//
+//        model.addAttribute("carByIdRoute", carService.getCarByRouteId(Long.parseLong((routeId))));
         return "admin/list-route";
     }
+
+//    @RequestMapping("/list-route")
+//    public String ListRoutePage(Model model, HttpServletRequest request, @PathVariable(name = "id", required = false) Long routeId) {
+//        if (routeId != null) {
+//            model.addAttribute("carByIdRoute", carService.getCarByRouteId(routeId));
+//        }
+//        model.addAttribute("routespack", routeService.getRoutes());
+//        return "admin/list-route";
+//    }
+
+
+
 //    @RequestMapping("/Route")
 //    public String routePage(Model model, HttpServletRequest request) {
 //        model.addAttribute("routes", routeService.getRoutes());

@@ -61,7 +61,13 @@
       transition-duration: 0.4s;
     }
     .ip {
-      width: 220px;
+      width: 200px;
+      text-align: center;
+      font-size: 18px;
+      border-radius: 15px;
+    }
+    .ipTime{
+      width: 80px;
       text-align: center;
       font-size: 18px;
       border-radius: 15px;
@@ -79,12 +85,6 @@
   </div>
 </header>
 <!-- Navbar -->
-<%--<nav>--%>
-<%--    <ul>--%>
-<%--        <li><a href="home.jsp">หน้าหลัก</a></li>--%>
-<%--        <li><a href="viewRoute.jsp">เส้นทางเดินรถ</a></li>--%>
-<%--    </ul>--%>
-<%--</nav>--%>
 <jsp:include page="/WEB-INF/view/admin/nav-admin.jsp"/>
 <!-- Navbar -->
 
@@ -94,7 +94,8 @@
 <%--  <%Busstop busstop = (Busstop) request.getAttribute("busstop");%>--%>
 <%--  <%Route route = (Route) request.getAttribute("route");%>--%>
 
-  <form action="${pageContext.request.contextPath}/saveBusStop/${id_route}"  method="POST">
+  <form action="${pageContext.request.contextPath}/saveBusStop/${id_route}"  method="POST"
+        name="addBusStop" onsubmit="return validateForm();">
     <div class="add">
       <p class="pAdd">เพิ่มจุดจอดรถ</p>
 
@@ -103,12 +104,14 @@
 
         <tr>
           <td><img src="${pageContext.request.contextPath}/assets/img/bus-stop.png" class="icon"></td>
+          <td> ชื่อจุดจอด </td>
           <td><input type="text" name="nameBussTop" id="nameBussTop" class="ip"/></td>
+          <td style="width: 30px"></td>
           <td><img src="${pageContext.request.contextPath}/assets/img/clock.png" class="icon"></td>
-          <td><input type="text" name="spendingTime" id="spendingTime" class="ip"/></td>
+          <td> ระยะเวลา </td>
+          <td><input type="text" name="spendingTime" id="spendingTime" class="ipTime"/></td>
+          <td> นาที </td>
         </tr>
-
-
       </table>
     </div>
 
@@ -121,10 +124,94 @@
   </form>
 </section>
 
-
 <!-- footer -->
 <jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>
 <!-- footer -->
 </body>
+
+<SCRIPT>
+   // เช็ค nameBussTop
+  // document.getElementById('nameBussTop').addEventListener('input', function() {
+  //   let nameBussTop = this.value;
+  //
+  //   // 1. ห้ามเป็นค่าว่าง
+  //   if (nameBussTop.trim() === '') {
+  //     this.setCustomValidity('กรุณากรอกข้อมูล');
+  //
+  //   // 2. สามารถเป็น อักขระภาษาไทย ภาษาอังกฤษ และตัวเลขได้ทุกตัว
+  //   } else if (/^[a-zA-Z0-9ก-๏\s]+$/.test(nameBussTop)){
+  //     this.setCustomValidity('กรุณากรอกข้อมูลให็ที่ถูกต้อง');
+  //
+  //   //  3. มีจำนวนอักขระไม่น้อยกว่า 1 และไม่เกิน 100 ตัวอักษร
+  //   } else if (nameBussTop.length < 1 || nameBussTop.length > 100){
+  //     this.setCustomValidity('กรุณากรอกข้อมูลที่มีความยาวระหว่าง 1 ถึง 100 ตัวอักษร');
+  //   }else {
+  //     this.setCustomValidity('');
+  //
+  //   }
+  // });
+
+   document.getElementById('nameBussTop').addEventListener('input', function() {
+     let nameBussTop = this.value;
+
+     // 1. ห้ามเป็นค่าว่าง
+     if (nameBussTop.trim() === '') {
+       this.setCustomValidity('กรุณากรอกข้อมูล');
+     } else {
+       this.setCustomValidity('');
+
+       // 2. สามารถเป็น อักขระภาษาไทย ภาษาอังกฤษ และตัวเลขได้ทุกตัว
+       const pattern = /^[a-zA-Z0-9ก-๏\s]+$/;
+       if (!pattern.test(nameBussTop)) {
+         this.setCustomValidity('กรุณากรอกอักขระที่ถูกต้อง');
+       } else {
+         this.setCustomValidity('');
+
+         // 3. มีจำนวนอักขระไม่น้อยกว่า 1 และไม่เกิน 100 ตัวอักษร
+         if (nameBussTop.length < 1 || nameBussTop.length > 100) {
+           this.setCustomValidity('กรุณากรอกข้อมูลที่มีความยาวระหว่าง 1 ถึง 100 ตัวอักษร');
+         } else {
+           this.setCustomValidity('');
+
+         }
+       }
+     }
+   });
+
+   document.getElementById('spendingTime').addEventListener('input', function() {
+     let spendingTime = this.value;
+
+     // 1. เช็คว่าเป็นตัวเลขเท่านั้น
+     if (!/^\d+$/.test(spendingTime)) {
+       this.setCustomValidity('กรุณากรอกข้อมูลเป็นตัวเลขเท่านั้น');
+     } else {
+       // ตรวจสอบขนาด 1-2 ตัวเท่านั้น
+       if (spendingTime.length < 1 || spendingTime.length > 2) {
+         this.setCustomValidity('กรุณาต้องกรอกข้อมูล ไม่เกิน 2 ตัว');
+       } else {
+         // 3. ล้างข้อความข้อผิดพลาดในกรณีที่ถูกต้อง
+         this.setCustomValidity('');
+       }
+
+       // 4. ตรวจสอบห้ามเป็นค่าว่าง
+       if (spendingTime.trim() === '') {
+         this.setCustomValidity('กรุณากรอกข้อมูล');
+       }
+     }
+   });
+
+   function validateForm() {
+     const nameBussTop = document.getElementById("nameBussTop").value;
+     const spendingTime = document.getElementById("spendingTime").value;
+
+
+     if (nameBussTop === "" || spendingTime === "" ) {
+       alert("กรุณากรอกข้อมูลให้ครบ");
+       return false; // ยกเลิกการส่งข้อมูล
+     }
+     return true; // ส่งข้อมูลเมื่อข้อมูลถูกต้อง
+   }
+
+</SCRIPT>
 
 </html>

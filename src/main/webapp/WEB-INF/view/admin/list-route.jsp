@@ -58,11 +58,11 @@
             background-color: rgba(125, 161, 125, 0.18);
         }
 
-        .addButton{
+        .AddRoute{
             text-align: center;
             height: auto;
         }
-         .addButton button{
+         .AddRoute button{
             width: 65px;
              height: 55px;
             background: #ffa500;
@@ -72,9 +72,27 @@
             margin-right: 95px;
             margin-bottom: 10px;
             transition-duration: 0.4s;
-
         }
-         .addButton button:hover {
+         .AddRoute button:hover {
+            background-color: #fffb00; /* Green */
+            color: rgb(0, 0, 0);
+        }
+         .goAssign{
+             text-align: center;
+             height: auto;
+         }
+        .goAssign button{
+            width: 215px;
+            height: 55px;
+            background: #ffa500;
+            border-radius: 20px;
+            font-size: 16px;
+            float: right;
+            margin-right: 95px;
+            margin-top: 20px;
+            transition-duration: 0.4s;
+        }
+        .goAssign button:hover {
             background-color: #fffb00; /* Green */
             color: rgb(0, 0, 0);
         }
@@ -101,13 +119,10 @@
     </div>
 
 
-    <div class="addButton">
+    <div class="AddRoute">
         <a href="${pageContext.request.contextPath}/addRoute">
             <button>
                         <img src="${pageContext.request.contextPath}/assets/img/Adds.png" style="width: 30px; ">
-                </table>
-
-
             </button>
         </a>
     </div>
@@ -121,22 +136,55 @@
             <th class="th">ลบเส้นทาง</th>
             <th class="th">รายละเอียดจุดจอด</th>
             <th class="th">รายละเอียดเวลาเดินรถ</th>
+            <th class="th">มอบหมายหย้าที่คนขับ</th>
         </tr>
         <c:forEach var="route" items="${routespack}">
             <tr class="blockDataRoute" >
                 <td class="td">${route.id_route}</td>
                 <td class="td">${route.name_route}</td>
-<%--                <td class="td">${driver.sername_driver}</td>--%>
-<%--                <td class="td">${driver.tel_driver}</td>--%>
-<%--                <td class="td">${driver.email_driver}</td>--%>
+
 
                 <td class="td"><a href="${pageContext.request.contextPath}/route/${route.id_route}"><img src="${pageContext.request.contextPath}/assets/img/edit.png" style="width: 20px"></a></td>
-                <td class="td"><a href="${pageContext.request.contextPath}/deleteRoute/${route.id_route}"><img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>
+
+
+                <td class="td"><a href="${pageContext.request.contextPath}/deleteRoute/${route.id_route}"
+                                  onclick="if(!(confirm('ต้องการลบข้อมูลของ'+ ' ' +  '${route.name_route}' + ' ' +'ใช่หรือไม่'))) return false">
+                    <img src="${pageContext.request.contextPath}/assets/img/trash.png" style="width: 20px"></a></td>
+
+
                 <td class="td"><a href="${pageContext.request.contextPath}/viewBusStopRoute/${route.id_route}"><img src="${pageContext.request.contextPath}/assets/img/file.png" style="width: 20px"></a></td>
                 <td class="td"><a href="${pageContext.request.contextPath}/viewRouteTime/${route.id_route}"><img src="${pageContext.request.contextPath}/assets/img/file.png" style="width: 20px"></a></td>
+
+
+                <td class="td">
+                    <a href="${pageContext.request.contextPath}/assignDriver/${route.id_route}">
+                    <img src="${pageContext.request.contextPath}/assets/img/addBus.png" style="width: 20px">
+                    </a>
+                ${route.cars}
+<%--                    <c:forEach items="${carByIdRoute}" var="car">--%>
+<%--                        ${car.regplate_no}--%>
+<%--                    </c:forEach>--%>
+
+                </td>
+
             </tr>
         </c:forEach>
     </table>
+
+<%--    <div class="goAssign">--%>
+<%--        <a href="${pageContext.request.contextPath}/list-assign">--%>
+<%--            <button>--%>
+<%--                <table>--%>
+<%--                    <tr>--%>
+<%--                        <td>รายการหน้าที่คนขับ</td>--%>
+<%--                        <td style="width: 15px"></td>--%>
+<%--                        <td><img src="${pageContext.request.contextPath}/assets/img/right-arrow.png" style="width: 30px; "></td>--%>
+<%--                    </tr>--%>
+<%--                </table>--%>
+
+<%--            </button>--%>
+<%--        </a>--%>
+<%--    </div>--%>
 
 
 </section>
