@@ -73,4 +73,12 @@ public class CarDaoImpl implements CarDao{
         return query.getResultList();
     }
 
+    @Override
+    public List<Car> getCarsByDriverId(long driverId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Car> query = session.createQuery("FROM Car c WHERE c.driver.id_driver =: dId", Car.class);
+        query.setParameter("dId", driverId);
+        return query.getResultList();
+    }
+
 }

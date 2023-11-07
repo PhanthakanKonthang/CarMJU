@@ -3,7 +3,9 @@ package projectmju.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import projectmju.dao.CarDao;
 import projectmju.dao.DriverDao;
+import projectmju.model.Car;
 import projectmju.model.Driver;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public class DriverServiceImpl implements DriverService{
 
     @Autowired
     private DriverDao driverDao;
+
+    @Autowired
+    private CarDao carDao;
 
     @Override
     @Transactional
@@ -40,8 +45,13 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     @Transactional
-    public void deleteDriver(long driverId) {
-        driverDao.deleteDriver(driverId);
+    public boolean deleteDriver(long driverId) {
+        List<Car> cars = carDao.getCarsByDriverId(driverId);
+        if (cars.size() == 0) {
+            driverDao.deleteDriver(driverId);
+            return true;
+        }
+        return false;
     }
 
     @Override

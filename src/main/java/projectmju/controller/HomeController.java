@@ -89,6 +89,18 @@ public class HomeController {
     @GetMapping("/searchRoute")
     public String searchRoute(Model model, @RequestParam("id_route") String id_route) {
         model.addAttribute("route", routeService.getRoutes());
+        Route route = routeService.getRouteById(Long.parseLong(id_route));
+        String primaryColorCode = "";
+        String secondaryColorCode = "";
+        if (route.getName_route().equals("เส้นสีแดง")) {
+            primaryColorCode = "#e12121";
+            secondaryColorCode = "#eeb29b";
+        } else if (route.getName_route().equals("เส้นสีฟ้า")) {
+            primaryColorCode = "#56b0cb";
+            secondaryColorCode = "#98d0f3";
+        }
+        model.addAttribute("primaryColorCode", primaryColorCode);
+        model.addAttribute("secondaryColorCode", secondaryColorCode);
 //        model.addAttribute("routeTimeTable", routeTimeService.getRoutetimetables());
 
         model.addAttribute("routeTimeTable", routeService.getSearchRt(Long.parseLong(id_route)));
@@ -100,11 +112,12 @@ public class HomeController {
 
     @GetMapping("/searchRoute2")
     public String searchRoute2(Model model) {
+
         model.addAttribute("route", routeService.getRoutes());
-        model.addAttribute("routeTimeTable", routeTimeService.getRoutetimetables());
+        model.addAttribute("routeTimeTable", null);
 //
-        model.addAttribute("busstop", routeService.getSearchBusstop(1));
-        model.addAttribute("routeTimeTable", routeService.getSearchRt(1));
+        model.addAttribute("busstop", null);
+        model.addAttribute("routeTimeTable", null);
 
         System.out.println(routeTimeService.getRoutetimetables().size());
 

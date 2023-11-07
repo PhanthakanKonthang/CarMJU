@@ -48,7 +48,7 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
-            margin-bottom: 15px;
+            margin: 0 auto 15px;
         }
     </style>
 </head>
@@ -74,7 +74,7 @@
                 </td>
             </tr>
         </table>
-        <form action="${pageContext.request.contextPath}/search-result" method="POST">
+        <form action="${pageContext.request.contextPath}/search-result" method="POST" onsubmit="return validateForm();">
         <table style="margin: auto;  margin-top: 30px;">
             <tr>
                 <td><img src="${pageContext.request.contextPath}/assets/img/location.png" width="40px" height="40px"></td>
@@ -82,7 +82,8 @@
                 <td></td>
                 <td>
 
-                    <select class="choose" name="start_point">
+                    <select class="choose" name="start_point" id="start_point" >
+                        <option value="เลือกต้นทาง">เลือกต้นทาง</option>
                         <c:forEach items="${busStop}" var="busStops">
                         <option> ${busStops}</option>
                         </c:forEach>
@@ -96,7 +97,8 @@
                 <td></td>
                 <td>
 
-                    <select class="choose" name="destination">
+                    <select class="choose" name="destination" id="destination">
+                        <option value="เลือกปลายทาง">เลือกปลายทาง</option>
                         <c:forEach items="${busStop}" var="busStops">
                         <option>${busStops}</option>
                         </c:forEach>
@@ -234,6 +236,31 @@
 <jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>
 <!-- footer -->
 </body>
+
+<script>
+
+    // document.getElementById("submit_button").addEventListener("click", function (event) {
+    //     var start_point = document.getElementById("start_point").value;
+    //     if (start_point === "เลือกต้นทาง") {
+    //         alert("โปรดเลือกต้นทาง");
+    //         event.preventDefault(); // หยุดการส่งแบบฟอร์มถ้ามีข้อผิดพลาด
+    //     }
+    // });
+
+    function validateForm() {
+        const start_point = document.getElementById("start_point").value;
+        const destination = document.getElementById("destination").value;
+
+        if (start_point === "เลือกต้นทาง" || destination === "เลือกปลายทาง") {
+            alert("โปรดเลือกต้นทางและปลายทาง");
+            return false; // ยกเลิกการส่งข้อมูล
+        }
+
+        return true; // ส่งข้อมูลเมื่อข้อมูลถูกต้อง
+    }
+
+
+</script>
 
 </html>
 

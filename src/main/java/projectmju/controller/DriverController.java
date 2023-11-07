@@ -63,9 +63,13 @@ public class DriverController {
     }
 
     @GetMapping("deleteDriver/{id}")
-    public String deleteDriver (@PathVariable("id") String driverId){
-        driverService.deleteDriver(Long.parseLong(driverId));
-        return "redirect:/driver-list";
+    public String deleteDriver (@PathVariable("id") String driverId, Model model){
+        boolean delFinished = driverService.deleteDriver(Long.parseLong(driverId));
+        if (!delFinished) {
+            model.addAttribute("delAlert", false);
+        }
+        model.addAttribute("driversPack", driverService.getDrivers());
+        return "admin/list-driver";
     }
     //Driver
     //Driver

@@ -142,7 +142,11 @@
 </section>
 <%--  ListDriver --%>
 
-
+<c:if test="${delAlert == false && delAlert != null}">
+    <script>
+        alert("ไม่สามารถลบได้");
+    </script>
+</c:if>
 </body>
 <!-- footer -->
 <jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>

@@ -53,12 +53,12 @@
         }
 
         .thData {
-            background-color: #ffa500;
+            background-color: ${primaryColorCode};
             color: white;
             text-align: center;
         }
         .blockDataRoute:nth-child(even) {
-            background-color: rgba(255, 165, 0, 0.21);
+            background-color: ${secondaryColorCode};
         }
         .dataBusAndRoute {
             border-collapse: collapse;
@@ -68,7 +68,7 @@
         .showRouteName{
         text-align: center;
         width: 350px;
-        background: #7DA17D;
+        background: ${primaryColorCode};;
         margin: 20px auto;
         padding: 10px;
         border-radius: 25px;
@@ -205,7 +205,7 @@
                 </c:forEach>
             </c:when>
             <c:otherwise>
-                เส้นสีแดง
+                เลือกเส้นทาง
             </c:otherwise>
         </c:choose>
         </h3>
@@ -213,40 +213,42 @@
 
 <%--    แสดงชื่อเส้นทางที่เลือก     --%>
 
-    <table class="dataBusAndRoute">
-        <thead>
-        <th class="thData" style="width: 130px">ลำดับจุดจอด</th>
-        <th class="thData">ชื่อจุดจอด</th>
-        <% for (int i = 0; i < numberOfRounds; i++) { %>
-        <th class="thData">รอบที่ <%= i + 1 %></th>
-        <% } %>
-        </thead>
-        <tbody>
-        <c:set var="busStopCounter" value="0" scope="page"/>
-        <%
-            for (int i = 0; i < busstops.size(); i++) {
-                Busstop busStop = busstops.get(i);
-        %>
-
-        <c:set var="busStopCounter" value="${busStopCounter + 1}" scope="page"/>
-
-        <tr class="blockDataRoute">
-            <td class="tdData">ลำดับ ${busStopCounter} </td>
-            <td class="tdData"><%= busStop.getName_busstop() %></td>
-            <% for (int round = 0; round < numberOfRounds; round++) {
-                calendars[round].setTime(rounds[round]);
-                calendars[round].add(Calendar.MINUTE, busstops.get(i).getSpendingtime());
-                rounds[round] = calendars[round].getTime();
+    <c:if test="${routeTimeTable != null}">
+        <table class="dataBusAndRoute">
+            <thead>
+            <th class="thData" style="width: 130px">ลำดับจุดจอด</th>
+            <th class="thData">ชื่อจุดจอด</th>
+            <% for (int i = 0; i < numberOfRounds; i++) { %>
+            <th class="thData">รอบที่ <%= i + 1 %></th>
+            <% } %>
+            </thead>
+            <tbody>
+            <c:set var="busStopCounter" value="0" scope="page"/>
+            <%
+                for (int i = 0; i < busstops.size(); i++) {
+                    Busstop busStop = busstops.get(i);
             %>
-            <td class="tdData"> <%= dateFormat.format(rounds[round]) %> </td>
-            <% } // End of round loop
+
+            <c:set var="busStopCounter" value="${busStopCounter + 1}" scope="page"/>
+
+            <tr class="blockDataRoute">
+                <td class="tdData">ลำดับ ${busStopCounter} </td>
+                <td class="tdData"><%= busStop.getName_busstop() %></td>
+                <% for (int round = 0; round < numberOfRounds; round++) {
+                    calendars[round].setTime(rounds[round]);
+                    calendars[round].add(Calendar.MINUTE, busstops.get(i).getSpendingtime());
+                    rounds[round] = calendars[round].getTime();
+                %>
+                <td class="tdData"> <%= dateFormat.format(rounds[round]) %> </td>
+                <% } // End of round loop
+                %>
+            </tr>
+            <%
+                } // End of bus stop loop
             %>
-        </tr>
-        <%
-            } // End of bus stop loop
-        %>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </c:if>
 
     <%
         } else {

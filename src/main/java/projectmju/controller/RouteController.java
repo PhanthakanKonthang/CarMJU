@@ -68,9 +68,13 @@ public class RouteController {
     }
 
     @GetMapping("deleteRoute/{id}")
-    public String deleteRoute (@PathVariable("id") String routeId){
-        routeService.deleteRoute(Long.parseLong(routeId));
-        return "redirect:/list-route";
+    public String deleteRoute (@PathVariable("id") String routeId, Model model){
+        boolean delStatus = routeService.deleteRoute(Long.parseLong(routeId));
+        if (!delStatus) {
+            model.addAttribute("delAlert", false);
+        }
+        model.addAttribute("routespack", routeService.getRoutes());
+        return "admin/list-route";
     }
 
 

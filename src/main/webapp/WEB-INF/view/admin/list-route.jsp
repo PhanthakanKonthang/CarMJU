@@ -100,7 +100,7 @@
     </style>
 
 </head>
-<body>
+<body onload="">
 <header>
     <div class="header">
         <div class="logo1"><img src="${pageContext.request.contextPath}/assets/img/LogoMJU.png" alt=""></div>
@@ -157,13 +157,14 @@
 
 
                 <td class="td">
+
                     <a href="${pageContext.request.contextPath}/assignDriver/${route.id_route}">
                     <img src="${pageContext.request.contextPath}/assets/img/addBus.png" style="width: 20px">
                     </a>
-                ${route.cars}
-<%--                    <c:forEach items="${carByIdRoute}" var="car">--%>
-<%--                        ${car.regplate_no}--%>
-<%--                    </c:forEach>--%>
+
+                    <c:forEach items="${route.cars}" var="car">
+                        ${car.regplate_no} : ${car.driver.name_driver}
+                    </c:forEach>
 
                 </td>
 
@@ -188,6 +189,14 @@
 
 
 </section>
+
+
+
+<c:if test="${delAlert == false && delAlert != null}">
+    <script>
+        alert("ไม่สามารถลบได้");
+    </script>
+</c:if>
 <%--  ListRoute --%>
 
 <!-- footer -->

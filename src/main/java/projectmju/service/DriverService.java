@@ -12,7 +12,7 @@ public interface DriverService {
     Driver getDriverById(long driverId);
     void updateDriver(Driver driver);
 
-    void deleteDriver(long driverId);
+    boolean deleteDriver(long driverId);
 
     List<Driver> getDriversNoCar();
 

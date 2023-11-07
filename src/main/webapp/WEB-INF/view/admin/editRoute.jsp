@@ -35,7 +35,7 @@
             background: #ffa500;
             text-align: center;
             padding: 10px;
-            width: 35%;
+            width: 40%;
             font-size: 18px;
             font-weight: 500;
             border-radius: 30px;
