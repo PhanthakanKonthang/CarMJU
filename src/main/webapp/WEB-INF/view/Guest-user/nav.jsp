@@ -9,7 +9,7 @@
 <%--        <security:authorize access="hasRole('MANAGER')">--%>
             <li><a href="${pageContext.request.contextPath}/searchRoute2">เส้นทางการเดินรถ</a></li>
 <%--        </security:authorize>--%>
-            <li><a>แผนที่</a></li>
+            <li><a href="${pageContext.request.contextPath}/map">แผนที่</a></li>
 <%--        <security:authorize access="!isAuthenticated()">--%>
             <li><a href="${pageContext.request.contextPath}/login">ลงชื่อเข้าสู่ระบบ</a></li>
 <%--        </security:authorize>--%>

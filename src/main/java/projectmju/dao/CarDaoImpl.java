@@ -81,4 +81,13 @@ public class CarDaoImpl implements CarDao{
         return query.getResultList();
     }
 
+    @Override
+    public List<Car> getCarsNoRouteId() {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Car> query = session.createQuery("select c from Car c where c.route.id_route is null ", Car.class);
+        List<Car> cars = query.getResultList();
+        return cars;
+    }
+
+
 }

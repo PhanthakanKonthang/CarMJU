@@ -61,8 +61,8 @@ public class RouteServiceImpl implements RouteService{
     @Transactional
     public boolean deleteRoute(long routeId) {
         Route route = routeDao.getRouteById(routeId);
-
-        if ((route.getRoutetimetable().size() == 0 && route.getBusstops().size() == 0) && route.getCars().size() == 0) {
+//&& route.getCars().size() == 0
+        if ((route.getRoutetimetable().size() == 0 && route.getBusstops().size() == 0) ) {
             routeDao.deleteRoute(routeId);
             return true;
         }

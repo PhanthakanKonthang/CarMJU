@@ -56,4 +56,12 @@ public class CarServiceImpl implements CarService{
     public List<Car> getCarByRouteId(long routeId) {
         return carDao.getCarByRouteId(routeId);
     }
+
+    @Override
+    @Transactional
+    public List<Car> getCarsNoRouteId() {
+        return carDao.getCarsNoRouteId();
+    }
+
+
 }

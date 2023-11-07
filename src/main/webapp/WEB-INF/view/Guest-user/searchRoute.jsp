@@ -68,7 +68,7 @@
         .showRouteName{
         text-align: center;
         width: 350px;
-        background: ${primaryColorCode};;
+        background: ${primaryColorCode};
         margin: 20px auto;
         padding: 10px;
         border-radius: 25px;

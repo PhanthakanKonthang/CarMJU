@@ -136,7 +136,7 @@
             <th class="th">ลบเส้นทาง</th>
             <th class="th">รายละเอียดจุดจอด</th>
             <th class="th">รายละเอียดเวลาเดินรถ</th>
-            <th class="th">มอบหมายหย้าที่คนขับ</th>
+            <th class="th">มอบหมายหน้าที่คนขับ</th>
         </tr>
         <c:forEach var="route" items="${routespack}">
             <tr class="blockDataRoute" >
@@ -157,16 +157,27 @@
 
 
                 <td class="td">
+                    <a href="${pageContext.request.contextPath}/assignDriver/${route.id_route}" style="text-decoration: none; color: #000000;">
+                        <img src="${pageContext.request.contextPath}/assets/img/addBus.png" style="width: 25px">
 
-                    <a href="${pageContext.request.contextPath}/assignDriver/${route.id_route}">
-                    <img src="${pageContext.request.contextPath}/assets/img/addBus.png" style="width: 20px">
+                        <c:forEach items="${route.cars}" var="car">
+            <span style="font-size: 16px; display: block;">
+                ${car.regplate_no} : ${car.driver.name_driver}
+            </span>
+                        </c:forEach>
                     </a>
-
-                    <c:forEach items="${route.cars}" var="car">
-                        ${car.regplate_no} : ${car.driver.name_driver}
-                    </c:forEach>
-
                 </td>
+
+            <%--                <td class="td">--%>
+
+<%--                    <a href="${pageContext.request.contextPath}/assignDriver/${route.id_route}" style="text-decoration: none; color: #000000;">--%>
+<%--                    <img src="${pageContext.request.contextPath}/assets/img/addBus.png" style="width: 30px">--%>
+
+<%--                    <c:forEach items="${route.cars}" var="car">--%>
+<%--                        ${car.regplate_no} : ${car.driver.name_driver}--%>
+<%--                    </c:forEach>--%>
+<%--                    </a>--%>
+<%--                </td>--%>
 
             </tr>
         </c:forEach>
@@ -190,11 +201,9 @@
 
 </section>
 
-
-
 <c:if test="${delAlert == false && delAlert != null}">
     <script>
-        alert("ไม่สามารถลบได้");
+        alert("ไม่สามารถลบได้ ต้องทำการลบข้อมูลจุดจอดและรอบเวลาออกให้หมดก่อน");
     </script>
 </c:if>
 <%--  ListRoute --%>

@@ -18,4 +18,6 @@ public interface CarService {
     List<Car> getCarsNotNullRouteAndDriver();
 
     List<Car> getCarByRouteId(long routeId);
+
+    List<Car> getCarsNoRouteId();
 }

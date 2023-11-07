@@ -110,7 +110,10 @@
             <br><br>
             <center>
                 <button type="submit" class="button"><img src="${pageContext.request.contextPath}/assets/img/SearchView.png" class="ICsearch">ค้นหา</button>
-                <button type="reset" class="button">ยกเลิก</button>
+<%--                <button type="reset" class="button">ยกเลิก</button>--%>
+                <a href="${pageContext.request.contextPath}/">
+                    <button type="button" class="button">ย้อนกลับ</button>
+                </a>
             </center>
         </form>
 
@@ -118,117 +121,70 @@
 
 </section>
 
+
 <section class="main9">
     <c:forEach items="${routes}" var="route">
-    <div class="resultSearch">
-        <div>
+        <c:choose>
+            <c:when test="${not empty intervals.get(route.name_route) && intervals.get(route.name_route) >= 0}">
+                <div class="resultSearch">
+                    <div>
+                        <h1>${route.name_route}</h1>
+                        <c:forEach items="${route.cars}" var="car">
+                            <table>
+                                <tr>
+                                    <td><h3>คนขับรถ : ${car.driver.name_driver} ${car.driver.sername_driver}</h3></td>
+                                    <td style="width: 25px"></td>
+                                    <td><h3>ทะเบียนรถ : ${car.regplate_no}</h3></td>
+                                </tr>
+                            </table>
+                        </c:forEach>
+                    </div>
 
-                <%--                        ชื่อเส้นทาง--%>
-            <h1>${route.name_route}</h1>
+                    <div>
+                        <table>
+                            <tr>
+                                <c:forEach items="${route.routetimetable}" var="routetimetable">
+                                    <td>
+                                        <h3>รอบ : <fmt:formatDate value="${routetimetable.start_time}" pattern="HH:mm" /> น.</h3>
+                                    </td>
+                                    <td style="width: 20px"></td>
+                                </c:forEach>
+                            </tr>
+                        </table>
+                    </div>
 
-            <c:forEach items="${route.cars}" var="car">
-                <table>
-                    <tr>
-                        <td><h3>คนขับรถ : ${car.driver.name_driver} ${car.driver.sername_driver}</h3></td>
-                        <td style="width: 25px"></td>
-                        <td><h3>ทะเบียนรถ : ${car.regplate_no}</h3></td>
-                    </tr>
-                </table>
-            </c:forEach>
-        </div>
+                    <div>
+                        <c:forEach items="${route.busstops}" var="busstop">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <c:if test="${busstop.name_busstop.equals(start_point_name)}">
+                                            <h3>ต้นทาง : ${busstop.name_busstop}</h3>
+                                        </c:if>
+                                    </td>
+                                    <td>
+                                        <c:if test="${busstop.name_busstop.equals(destination_name)}">
+                                            <h3>ปลายทาง : ${busstop.name_busstop}</h3>
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </table>
+                        </c:forEach>
+                    </div>
 
-        <div>
-            <table>
-                <tr>
-                    <c:forEach items="${route.routetimetable}" var="routetimetable">
-                        <%--            <td>--%>
-                        <%--                <h3>รอบ : ${routetimetable.start_time}</h3>--%>
-                        <%--            </td>--%>
-                        <td>
-                            <h3>รอบ : <fmt:formatDate value="${routetimetable.start_time}" pattern="HH:mm" /> น.</h3>
-                        </td>
-                        <td style="width: 20px">
-                        </td>
-                    </c:forEach>
-                </tr>
-            </table>
-        </div>
-
-        <div>
-            <c:forEach items="${route.busstops}" var="busstop">
-                <table>
-                    <tr>
-                        <td>
-                            <c:if test="${busstop.name_busstop.equals(start_point_name)}">
-                                <h3>ต้นทาง : ${busstop.name_busstop}</h3>
-                            </c:if>
-                        </td>
-                        <td>
-                            <c:if test="${busstop.name_busstop.equals(destination_name)}">
-                                <h3>ปลายทาง : ${busstop.name_busstop}</h3>
-                            </c:if>
-                        </td>
-                    </tr>
-                </table>
-            </c:forEach>
-        </div>
-
-        <div style="background: rgba(255,165,0,0.75); width: 170px; border-radius: 15px">
-            <h4>ใช้เวลา : ${intervals.get(route.name_route)} นาที</h4>
-        </div>
-
-    </div>
+                    <div style="background: rgba(255,165,0,0.75); width: 170px; border-radius: 15px">
+                        <h4>ใช้เวลา : ${intervals.get(route.name_route)} นาที</h4>
+                    </div>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="resultSearch" style="background: red; border-radius: 10px;">
+                    <p>ไม่พบเส้นทาง</p>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </c:forEach>
 </section>
-
-
-
-<%--<c:forEach items="${routeTime}" var="route">--%>
-<%--    <div>--%>
-<%--            &lt;%&ndash;                        ชื่อเส้นทาง&ndash;%&gt;--%>
-<%--        <h1>${route.route.name_route}</h1>--%>
-
-<%--        <c:forEach items="${route.route.cars}" var="car">--%>
-<%--            <table>--%>
-<%--                <tr>--%>
-<%--                    <td><h3>คนขับรถ : ${car.driver.name_driver} ${car.driver.sername_driver}</h3></td>--%>
-<%--                    <td style="width: 25px"></td>--%>
-<%--                    <td><h3>ทะเบียนรถ : ${car.regplate_no}</h3></td>--%>
-<%--                </tr>--%>
-<%--            </table>--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-
-<%--    <div>--%>
-<%--        <c:forEach items="${route.route.routetimetable}" var="routetimetable">--%>
-<%--            <table>--%>
-<%--                <tr>--%>
-<%--                    <td><h2>${routetimetable.start_time}</h2></td>--%>
-<%--                </tr>--%>
-<%--            </table>--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-<%--    <div>--%>
-<%--        <c:forEach items="${route.route.busstops}" var="busstop">--%>
-<%--            <table>--%>
-<%--                <tr>--%>
-<%--                    <td>--%>
-<%--                        <c:if test="${busstop.name_busstop.equals(start_point_name)}">--%>
-<%--                            <h3>ต้นทาง : ${busstop.name_busstop}</h3>--%>
-<%--                        </c:if>--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        <c:if test="${busstop.name_busstop.equals(destination_name)}">--%>
-<%--                            <h3>ปลายทาง : ${busstop.name_busstop}</h3>--%>
-<%--                        </c:if>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
-<%--            </table>--%>
-<%--        </c:forEach>--%>
-<%--    </div>--%>
-<%--    <h4>ใช้เวลา : ${intervals.get(route.route)} นาที</h4>--%>
-<%--    </div>--%>
-<%--</c:forEach>--%>
 
 
 
@@ -239,13 +195,6 @@
 
 <script>
 
-    // document.getElementById("submit_button").addEventListener("click", function (event) {
-    //     var start_point = document.getElementById("start_point").value;
-    //     if (start_point === "เลือกต้นทาง") {
-    //         alert("โปรดเลือกต้นทาง");
-    //         event.preventDefault(); // หยุดการส่งแบบฟอร์มถ้ามีข้อผิดพลาด
-    //     }
-    // });
 
     function validateForm() {
         const start_point = document.getElementById("start_point").value;

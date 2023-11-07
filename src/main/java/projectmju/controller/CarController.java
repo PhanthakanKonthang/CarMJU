@@ -28,6 +28,7 @@ public class CarController {
     public String assign(@PathVariable("id") String routeId, Model model) {
         model.addAttribute("route", routeService.getRouteById(Long.parseLong(routeId)));
         model.addAttribute("carList", carService.getCars());
+        model.addAttribute("carNoList", carService.getCarsNoRouteId());
         model.addAttribute("driverList", driverService.getDriversNoCar());
         return "admin/assignDriver";
     }

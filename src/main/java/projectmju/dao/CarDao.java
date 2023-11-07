@@ -21,4 +21,6 @@ public interface CarDao {
     List<Car> getCarByRouteId(long routeId);
 
     List<Car> getCarsByDriverId (long driverId);
+
+    List<Car> getCarsNoRouteId();
 }

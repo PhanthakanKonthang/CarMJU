@@ -111,7 +111,7 @@
 
     <%--    <%Route route = (Route) request.getAttribute("route");%>--%>
 
-    <form action="${pageContext.request.contextPath}/saveCarRoute/${route.id_route}/update" method="post" name="carRoute">
+    <form action="${pageContext.request.contextPath}/saveCarRoute/${route.id_route}/update" method="post" name="carRoute" onsubmit="return validateForm();">
 
         <div class="listHead">
             <p>เพิ่มรถและคนขับประจำสาย</p>
@@ -131,16 +131,15 @@
                 </tr>
             </table>
 
-            <%Car car = (Car) request.getAttribute("car");%>
-            <select class="selectCarRoute" name="selectCarRoute">
-                <option value="0">กรุณาเลือกรถประจำเส้นทาง</option>
-                <c:forEach var="car" items="${carList}">
+            <select class="selectCarRoute" name="selectCarRoute" id="selectCarRoute">
+                <option value="กรุณาเลือกรถประจำเส้นทาง">กรุณาเลือกรถประจำเส้นทาง</option>
+                <c:forEach var="car" items="${carNoList}">
                     <option value="${car.regplate_no}" name="regplate_no">${car.regplate_no}</option>
                 </c:forEach>
             </select>
 
-            <select class="selectDriver" name="selectDriver">
-                <option value="0">กรุณาเลือกคนขับรถประจำเส้นทาง</option>
+            <select class="selectDriver" name="selectDriver" id="selectDriver">
+                <option value="กรุณาเลือกคนขับรถประจำเส้นทาง">กรุณาเลือกคนขับรถประจำเส้นทาง</option>
                 <c:forEach var="driver" items="${driverList}">
                     <option value="${driver.id_driver}" name="id_driver">${driver.name_driver} ${driver.sername_driver}</option>
                 </c:forEach>
@@ -166,9 +165,26 @@
 </section>
 
 
-
-</body>
 <!-- footer -->
 <jsp:include page="/WEB-INF/view/Guest-user/footer.jsp"/>
 <!-- footer -->
+<script>
+
+    function validateForm() {
+        const selectedCar = document.getElementById("selectCarRoute").value;
+        const selectDriver = document.getElementById("selectDriver").value;
+
+        if (selectedCar === "กรุณาเลือกรถประจำเส้นทาง"  || selectDriver === "กรุณาเลือกคนขับรถประจำเส้นทาง") {
+            alert("กรุณาเลือกรถและคนขับประจำเส้นทาง");
+            return false; // ยกเลิกการส่งฟอร์ม
+        }
+
+        return true; // ส่งฟอร์มเมื่อผู้ใช้เลือกรายการ
+    }
+
+</script>
+
+</body>
+
+
 </html>

@@ -30,6 +30,12 @@ public class HomeController {
         return "Guest-user/home";
     }
 
+    @RequestMapping("/map")
+    public String map(Model model) {
+        model.addAttribute("busStop", busstopService.getListNameBusStop());
+        return "Guest-user/map";
+    }
+
 
 //    @RequestMapping("/searchRoute")
 //    public String searchRoute(){
@@ -93,11 +99,17 @@ public class HomeController {
         String primaryColorCode = "";
         String secondaryColorCode = "";
         if (route.getName_route().equals("เส้นสีแดง")) {
-            primaryColorCode = "#e12121";
-            secondaryColorCode = "#eeb29b";
+            primaryColorCode = "#e51c23";
+            secondaryColorCode = "#f9bdbb";
         } else if (route.getName_route().equals("เส้นสีฟ้า")) {
-            primaryColorCode = "#56b0cb";
-            secondaryColorCode = "#98d0f3";
+            primaryColorCode = "#03a9f4";
+            secondaryColorCode = "#b3e5fc";
+        } else if (route.getName_route().equals("เส้นสีเขียว")) {
+            primaryColorCode = "#259b24";
+            secondaryColorCode = "#a3e9a4";
+        } else if (route.getName_route().equals("เส้นสีเหลือง")) {
+            primaryColorCode = "#ffeb3b";
+            secondaryColorCode = "#fff9c4";
         }
         model.addAttribute("primaryColorCode", primaryColorCode);
         model.addAttribute("secondaryColorCode", secondaryColorCode);
