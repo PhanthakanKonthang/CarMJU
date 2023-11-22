@@ -42,7 +42,7 @@ public class DriverController {
             driverService.saveDriver(driver1);
             //System.out.println(route.getId_route());
             return "redirect:/driver-list";
-        } catch (Exception e) { redirectAttributes.addFlashAttribute("Error", "พบข้อมูลที่ซ้ำกันในฐานข้อมูล");
+        } catch (Exception e) { redirectAttributes.addFlashAttribute("Error", "พบข้อมูลที่ซ้ำกันในฐานข้อมูล.");
             return "redirect:/addDriver";
         }
 
