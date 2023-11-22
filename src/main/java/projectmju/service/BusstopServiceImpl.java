@@ -1,6 +1,7 @@
 package projectmju.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import projectmju.dao.BusstopDao;
@@ -8,10 +9,7 @@ import projectmju.dao.RouteDao;
 import projectmju.model.Busstop;
 import projectmju.model.Route;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class BusstopServiceImpl implements BusstopService{
@@ -30,8 +28,20 @@ public class BusstopServiceImpl implements BusstopService{
 
     @Override
     @Transactional
+    public List<Busstop> getBusstopGroupByNameNoDes() {
+        return busstopDao.getBusstopGroupByNameNoDes();
+    }
+
+    @Override
+    @Transactional
     public List<Busstop> getBusstopsByRouteId(long routeId) {
         return busstopDao.getBusstopsByRouteId(routeId);
+    }
+
+    @Override
+    @Transactional
+    public List<Busstop> getBusstopGroupByNameNoStart() {
+        return busstopDao.getBusstopGroupByNameNoStart();
     }
 
 
@@ -65,5 +75,21 @@ public class BusstopServiceImpl implements BusstopService{
     @Transactional
     public List<String> getListNameBusStop() {
         return busstopDao.getListNameBusStop();
+    }
+
+    @Override
+    public Busstop findBusstopInRouteByName(Route route, String name) {
+        for (Busstop busstop : route.getBusstops()) {
+            if (name.equals(busstop.getName_busstop())) {
+                return busstop;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public List<Busstop> getBusstopsByStartPointIdAndDestIdAndRouteId(long start_point_id, long dest_id, long route_id) {
+        return busstopDao.getBusstopsByStartPointIdAndDestIdAndRouteId(start_point_id, dest_id, route_id);
     }
 }

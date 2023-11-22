@@ -53,4 +53,10 @@ public class RouteTimeServiceImpl implements RouteTimeService{
         routeTimeDao.deleteRoutetimetable(routetimetable);
     }
 
+    @Override
+    @Transactional
+    public List<Routetimetable> getRoutetimetableByRoute() {
+        return routeTimeDao.getRoutetimetableByRoute();
+    }
+
 }

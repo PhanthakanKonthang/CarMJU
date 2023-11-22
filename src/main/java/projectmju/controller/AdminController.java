@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import projectmju.model.Admin;
 import projectmju.service.*;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -68,20 +69,65 @@ public class AdminController {
         return "Guest-user/loginAdmin";
     }
 
+//    @PostMapping("/doLogin")
+//    public String doLoginByAdmin(@RequestParam Map<String, String> map, Model model, HttpSession session) {
+//        String username = map.get("username");
+//        String password = map.get("password");
+//        Admin admin = adminService.adminLogin(username, password);
+//        if (admin != null) {
+//            session.setAttribute("admin", admin);
+//            session.setMaxInactiveInterval(60 * 15);
+//            return "redirect:/driver-list";
+//        } else {
+//            model.addAttribute("loginFailed", true);
+//            return "Guest-user/loginAdmin";
+//        }
+//    }
+
+//    @PostMapping("/doLogin")
+//    public String doLoginByAdmin(@RequestParam Map<String, String> map, Model model, HttpSession session) {
+//        String username = map.get("username");
+//        String password = map.get("password");
+//
+//        try {
+//            Admin admin = adminService.adminLogin(username, password);
+//            if (admin != null) {
+//                session.setAttribute("admin", admin);
+//                session.setMaxInactiveInterval(60 * 15);
+//                return "redirect:/driver-list";
+//            } else {
+//                model.addAttribute("loginFailed", true);
+//                return "Guest-user/loginAdmin";
+//            }
+//        } catch (NoResultException e) {
+//            // กรณีไม่พบผลลัพธ์จากการค้นหา Admin
+//            model.addAttribute("loginFailed", true);
+//            return "Guest-user/loginAdmin";
+//        }
+//    }
+
     @PostMapping("/doLogin")
     public String doLoginByAdmin(@RequestParam Map<String, String> map, Model model, HttpSession session) {
         String username = map.get("username");
         String password = map.get("password");
-        Admin admin = adminService.adminLogin(username, password);
-        if (admin != null) {
-            session.setAttribute("admin", admin);
-            session.setMaxInactiveInterval(60 * 10);
-            return "redirect:/driver-list";
-        } else {
+
+        try {
+            Admin admin = adminService.adminLogin(username, password);
+            if (admin != null) {
+                session.setAttribute("admin", admin);
+                session.setMaxInactiveInterval(60 * 15);
+                return "redirect:/driver-list";
+            } else {
+                model.addAttribute("loginFailed", true);
+                return "Guest-user/loginAdmin";
+            }
+        } catch (NoResultException e) {
+            // กรณีไม่พบผลลัพธ์จากการค้นหา Admin
             model.addAttribute("loginFailed", true);
             return "Guest-user/loginAdmin";
         }
     }
+
 
     @RequestMapping("/doLogout")
     public String doLogout(HttpSession session) {

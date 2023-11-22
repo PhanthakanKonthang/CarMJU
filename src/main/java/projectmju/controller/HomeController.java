@@ -10,6 +10,7 @@ import projectmju.service.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -26,6 +27,8 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
+        model.addAttribute("busStopNoDes", busstopService.getBusstopGroupByNameNoDes());
+        model.addAttribute("busStopNoStart", busstopService.getBusstopGroupByNameNoStart());
         model.addAttribute("busStop", busstopService.getListNameBusStop());
         return "Guest-user/home";
     }
@@ -46,7 +49,8 @@ public class HomeController {
 
     @PostMapping("/search-result")
     public String searchResult (@RequestParam Map<String, String> map, Model model) {
-        model.addAttribute("busStopp", busstopService.getBusstops());
+        model.addAttribute("busStopNoDes", busstopService.getBusstopGroupByNameNoDes());
+        model.addAttribute("busStopNoStart", busstopService.getBusstopGroupByNameNoStart());
         model.addAttribute("busStop", busstopService.getListNameBusStop());
         String start_point = map.get("start_point");
         String destination = map.get("destination");
@@ -56,6 +60,11 @@ public class HomeController {
         List<Routetimetable> routeTimes = routeTimeService.getRoutetimetables();
 
         List<Route> routes = routeService.getRoutesByStartPointAndDestination(start_point, destination);
+
+        Map<String, String> routeColors = new HashMap<>();
+        Map<String, String> secondaryColorCode = new HashMap<>();
+
+
         model.addAttribute("start_point_name", start_point);
         model.addAttribute("destination_name", destination);
         Map<String, Integer> maps = new HashMap<>();
@@ -80,16 +89,54 @@ public class HomeController {
             intervalTime = destinationTime - startPointTime;
             maps.put(routes.get(i).getName_route(), intervalTime);
         }
+
+
         model.addAttribute("intervals", maps);
+        System.out.println("แสดงค่า" + maps);
+        System.out.println("MAP SIZEEE : " + maps.size());
+        System.out.println("NULL STATE : " + (maps == null? "NULL" : "NOT NULL"));
         //model.addAttribute("timemaps", timeMaps);
-        model.addAttribute("routes", routes);
+
+        List<Route> resultRoute = new ArrayList<>();
+
+        for (Route route : routes) {
+            long startPointId = busstopService.findBusstopInRouteByName(route, start_point).getId_busstop();
+            long destinationId = busstopService.findBusstopInRouteByName(route, destination).getId_busstop();
+            List<Busstop> listB = busstopService.getBusstopsByStartPointIdAndDestIdAndRouteId(startPointId, destinationId, route.getId_route());
+            route.setBusstops(listB);
+            resultRoute.add(route);
+
+//            String secondaryColorCode = "";
+
+            if (route.getName_route().equals("เส้นสีแดง")) {
+                routeColors.put("เส้นสีแดง", "#e51c23");
+                secondaryColorCode.put("เส้นสีแดง","#f9bdbb");
+            } else if (route.getName_route().equals("เส้นสีฟ้า")) {
+                routeColors.put("เส้นสีฟ้า", "#03a9f4");
+                secondaryColorCode.put("เส้นสีฟ้า","#b3e5fc");
+//                secondaryColorCode = "#b3e5fc";
+            }else if (route.getName_route().equals("เส้นสีเขียว")) {
+                routeColors.put("เส้นสีเขียว", "#259b24");
+                secondaryColorCode.put("เส้นสีเขียว","#a3e9a4");
+//                secondaryColorCode = "#a3e9a4";
+            }else if (route.getName_route().equals("เส้นสีเหลือง")) {
+                routeColors.put("เส้นสีเหลือง", "#ffeb3b");
+                secondaryColorCode.put("เส้นสีเหลือง","#fff9c4");
+//                secondaryColorCode = "#fff9c4";
+            }
+
+            model.addAttribute("secondaryColorCode", secondaryColorCode);
+        }
+
+        model.addAttribute("routes", resultRoute);
+        model.addAttribute("routeColors", routeColors);
+
+
         model.addAttribute("routesTimeTable", routeTimeService.getRoutetimetables());
+        model.addAttribute("routesTimeTableByRoute", routeTimeService.getRoutetimetableByRoute());
         model.addAttribute("routeTime", routeTimes);
         return "Guest-user/home";
     }
-
-
-
 
 
     @GetMapping("/searchRoute")
@@ -113,6 +160,7 @@ public class HomeController {
         }
         model.addAttribute("primaryColorCode", primaryColorCode);
         model.addAttribute("secondaryColorCode", secondaryColorCode);
+        
 //        model.addAttribute("routeTimeTable", routeTimeService.getRoutetimetables());
 
         model.addAttribute("routeTimeTable", routeService.getSearchRt(Long.parseLong(id_route)));
@@ -147,7 +195,6 @@ public class HomeController {
 //
 //        return "Guest-user/searchRoute";
 //    }
-
 
 }
 

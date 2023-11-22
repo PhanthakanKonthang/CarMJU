@@ -3,7 +3,9 @@ package projectmju.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,7 +31,7 @@ public class Route {
     private Set<Car> cars = new HashSet<>();
 
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Busstop> busstops = new HashSet<>();
+    private List<Busstop> busstops = new ArrayList<>();
 
     /////////////////////
 
@@ -70,11 +72,11 @@ public class Route {
         this.cars = cars;
     }
 
-    public Set<Busstop> getBusstops() {
+    public List<Busstop> getBusstops() {
         return busstops;
     }
 
-    public void setBusstops(Set<Busstop> busstops) {
+    public void setBusstops(List<Busstop> busstops) {
         this.busstops = busstops;
     }
 

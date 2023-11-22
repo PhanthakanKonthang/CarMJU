@@ -190,7 +190,6 @@
                                 <img src="${pageContext.request.contextPath}/assets/img/bus-stop.png" class="icon">
                                 จุดจอดที่ ${busStopCounter}
                             </td>
-
                             <!-- แสดงข้อมูลจุดจอดอื่น ๆ -->
                             <td class="tdDataBusStopRoute">${busStop.name_busstop}</td>
                             <td class="tdDataBusStopRoute">${busStop.spendingtime} นาที</td>
@@ -208,16 +207,13 @@
                         </tr>
                         </c:if>
                 </c:forEach>
-
             </table>
         </div>
-
         <div style="text-align: center;">
             <a href="${pageContext.request.contextPath}/list-route">
                 <button type="button" class="backTo">ย้อนกลับ</button>
             </a>
         </div>
-
     </form>
 </section>
 <%--  ListRoute --%>

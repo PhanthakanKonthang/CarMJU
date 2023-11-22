@@ -4,10 +4,15 @@ import projectmju.model.Busstop;
 
 
 import java.util.List;
+import java.util.Set;
 
 public interface BusstopDao {
 
     List<Busstop> getBusstops();
+
+    List<Busstop> getBusstopGroupByNameNoDes();
+
+    List<Busstop> getBusstopGroupByNameNoStart();
 
     void saveBusstop(Busstop busstop);
 
@@ -24,4 +29,6 @@ public interface BusstopDao {
 
     List<String> getListNameBusStop();
 
+    List<Busstop> getBusstopsByStartPointIdAndDestIdAndRouteId(long start_point_id, long dest_id, long route_id);
+//    List<Busstop> getBusStopsByStartPointToDestination();
 }

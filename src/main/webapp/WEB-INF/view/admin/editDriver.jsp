@@ -67,6 +67,15 @@
       border-radius: 15px;
       margin-bottom: 5px;
     }
+    .alertText{
+      align-items: center;
+      margin: 10px auto;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+
   </style>
 
 </head>
@@ -83,6 +92,18 @@
 
 <jsp:include page="/WEB-INF/view/admin/nav-admin.jsp"/>
 <!-- Navbar -->
+
+<c:if test="${not empty Error}">
+  <div class="alertText" style="background-color: red; color: white;">
+    <strong>แก้ไขข้อมูลไม่สำเร็จ:</strong> ${Error}
+  </div>
+  <script>
+    // Remove the error message after 3 seconds
+    setTimeout(function () {
+      document.querySelector('.alert').style.display = 'none';
+    }, 10000);
+  </script>
+</c:if>
 
 <%--  AddDriver --%>
 <section class="CssSection">

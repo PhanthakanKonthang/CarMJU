@@ -10,6 +10,7 @@ import projectmju.model.Driver;
 
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class BusstopDaoImpl implements BusstopDao{
@@ -27,6 +28,29 @@ public class BusstopDaoImpl implements BusstopDao{
             System.out.println(b.getId_busstop());
         }
         return busstops;
+    }
+
+    @Override
+    public List<Busstop> getBusstopGroupByNameNoDes() {
+        Session session = sessionFactory.getCurrentSession();
+//        Query <Busstop> query = session.createQuery("FROM Busstop b group by b.name_busstop ORDER BY b.id_busstop ASC", Busstop.class);
+        Query <Busstop> query = session.createQuery("FROM Busstop b where name_busstop<> 'โรงเทิดกสิกร (ปลายทาง)' group by b.name_busstop ORDER BY b.id_busstop ASC", Busstop.class);
+        List<Busstop> busStops = query.getResultList();
+        for (Busstop b : busStops) {
+            System.out.println(b.getId_busstop());
+        }
+        return busStops;
+    }
+
+    @Override
+    public List<Busstop> getBusstopGroupByNameNoStart() {
+        Session session = sessionFactory.getCurrentSession();
+        Query <Busstop> query = session.createQuery("FROM Busstop b where name_busstop<> 'โรงเทิดกสิกร (ต้นทาง)' group by b.name_busstop ORDER BY b.id_busstop ASC", Busstop.class);
+        List<Busstop> busStops = query.getResultList();
+        for (Busstop b : busStops) {
+            System.out.println(b.getId_busstop());
+        }
+        return busStops;
     }
 
     @Override
@@ -79,6 +103,8 @@ public class BusstopDaoImpl implements BusstopDao{
         return query.getResultList();
     }
 
+
+
 //    @Override
 //    public List<Busstop> getListNameBusStop() {
 //        Session session = sessionFactory.getCurrentSession();
@@ -95,6 +121,21 @@ public class BusstopDaoImpl implements BusstopDao{
         return listNameBusStop;
     }
 
+    @Override
+    public List<Busstop> getBusstopsByStartPointIdAndDestIdAndRouteId(long start_point_id, long dest_id, long route_id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Busstop> query = session.createQuery("FROM Busstop b WHERE b.id_busstop >= :spid AND b.id_busstop <= :did AND b.route.id_route =: rid ORDER BY b.id_busstop ASC", Busstop.class);
+        query.setParameter("spid", start_point_id);
+        query.setParameter("did", dest_id);
+        query.setParameter("rid", route_id);
+        List<Busstop> test = query.getResultList();
+        return test;
+    }
+
+//    @Override
+//    public List<Busstop> getBusStopsByStartPointToDestination() {
+//        return null;
+//    }
 
 
 }

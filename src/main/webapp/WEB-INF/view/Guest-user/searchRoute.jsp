@@ -95,12 +95,26 @@
             <tr>
                 <td>
 
-                    <select class="select" name="id_route" onchange="submitForm()">
-                        <option>กรุณาเลือกเส้นทาง</option>
+                    <select name="id_route" id="id_route" class="select" onchange="submitForm()">
+                        <option>--กรุณาเลือกเส้นทาง--</option>
                         <c:forEach var="routes" items="${route}">
-                            <option value="${routes.id_route}">${routes.name_route}</option>
+                        <c:choose>
+                                <c:when test="${routes eq routes.name_route }">
+                                    <option value="${routes.id_route}" selected> ${routes.name_route}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${routes.id_route}"> ${routes.name_route}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
+
+<%--                    <select class="select" name="id_route" onchange="submitForm()">--%>
+<%--                        <option>กรุณาเลือกเส้นทาง</option>--%>
+<%--                        <c:forEach var="routes" items="${route}">--%>
+<%--                            <option value="${routes.id_route}">${routes.name_route}</option>--%>
+<%--                        </c:forEach>--%>
+<%--                    </select>--%>
 
                 </td>
             </tr>
@@ -232,7 +246,7 @@
             <c:set var="busStopCounter" value="${busStopCounter + 1}" scope="page"/>
 
             <tr class="blockDataRoute">
-                <td class="tdData">ลำดับ ${busStopCounter} </td>
+                <td class="tdData">จุดที่ ${busStopCounter} </td>
                 <td class="tdData"><%= busStop.getName_busstop() %></td>
                 <% for (int round = 0; round < numberOfRounds; round++) {
                     calendars[round].setTime(rounds[round]);

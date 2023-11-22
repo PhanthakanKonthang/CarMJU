@@ -163,7 +163,8 @@
             this.setCustomValidity('');
 
             // 2. สามารถเป็น อักขระภาษาไทย ภาษาอังกฤษ และตัวเลขได้ทุกตัว
-            const pattern = /^[a-zA-Z0-9ก-๏\s]+$/;
+            // const pattern = /^[a-zA-Z0-9ก-๏\s]+$/;
+            const pattern = /^[a-zA-Z0-9ก-๏\s!@#$%^&*()+=_\-[\]{};':"\\|,.<>/?]+$/;
             if (!pattern.test(nameBussTop)) {
                 this.setCustomValidity('กรุณากรอกอักขระที่ถูกต้อง');
             } else {

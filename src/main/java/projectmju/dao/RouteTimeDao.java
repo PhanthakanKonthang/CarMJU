@@ -20,4 +20,6 @@ public interface RouteTimeDao {
     void updateRoutetimetable(Routetimetable routetimetable);
 
     void deleteRoutetimetable(Routetimetable routetimetable);
+
+    List<Routetimetable> getRoutetimetableByRoute();
 }

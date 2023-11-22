@@ -70,12 +70,20 @@
 <jsp:include page="/WEB-INF/view/Guest-user/nav.jsp"/>
 
   <c:set var="loginStatus" scope="session" value="${loginFailed}"/>
-  <c:if test="${loginStatus == true && loginStatus != null}">
-    <center>
-      <p>Login Failed!<p>
-      <p>กรุณากรอกชื่อผู้ใช้งานและรหัสผ่านให้ถูกต้อง<p>
-    </center>
-  </c:if>
+<%--  <c:if test="${loginStatus == true && loginStatus != null}">--%>
+<%--    <center>--%>
+<%--      <p>Login Failed!<p>--%>
+<%--      <p>กรุณากรอกชื่อผู้ใช้งานและรหัสผ่านให้ถูกต้อง<p>--%>
+<%--    </center>--%>
+<%--  </c:if>--%>
+
+<c:if test="${loginStatus == true && loginStatus != null}">
+  <script type="text/javascript">
+    // alert("Login Failed! กรุณากรอกชื่อผู้ใช้งานและรหัสผ่านให้ถูกต้อง");
+    alert("ไม่พบผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+  </script>
+</c:if>
+
   <!-- Navbar -->
 
 <%-- Login --%>
@@ -107,6 +115,7 @@
 </body>
 
 <script>
+
   // document.getElementById('username').addEventListener('input', function () {
   //   // รับค่าจาก input
   //   let username = this.value;
@@ -175,7 +184,6 @@
       this.setCustomValidity('โปรดใส่รหัสผ่าน รหัสผ่านต้องประกอบด้วยตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น');
     }
   });
-
 
 </script>
 

@@ -68,8 +68,14 @@
             border-radius: 10px;
             margin-bottom: 5px;
         }
+        .alertText{
+            align-items: center;
+            margin: 10px auto;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
     </style>
-
 </head>
 
 <body>
@@ -83,6 +89,19 @@
 <!-- Navbar -->
 <jsp:include page="/WEB-INF/view/admin/nav-admin.jsp"/>
 <!-- Navbar -->
+
+<c:if test="${not empty Error}">
+    <div class="alertText" style="background-color: red; color: white;">
+        <strong>บันทึกข้อมูลไม่สำเร็จ:</strong> ${Error}
+    </div>
+    <script>
+        // Remove the error message after 3 seconds
+        setTimeout(function () {
+            document.querySelector('.alert').style.display = 'none';
+        }, 10000);
+    </script>
+</c:if>
+
 
 <%--  AddDriver --%>
 <section class="CssSection">
@@ -245,6 +264,23 @@
         }
         return true; // ส่งข้อมูลเมื่อข้อมูลถูกต้อง
     }
+
+    <%--function validateForm() {--%>
+    <%--    const name = document.getElementById("name_driver").value;--%>
+    <%--    const sername = document.getElementById("sername_driver").value;--%>
+    <%--    const tel = document.getElementById("tel_driver").value;--%>
+    <%--    const email = document.getElementById("email_driver").value;--%>
+    <%--    const error = "${Error}"; // เก็บค่า Error ที่มาจาก JSP--%>
+
+    <%--    if (name === "" || sername === "" || tel === "" || email === "") {--%>
+    <%--        alert("กรุณากรอกข้อมูลให้ครบ");--%>
+    <%--        return false; // ยกเลิกการส่งข้อมูล--%>
+    <%--    } else if (error.trim() !== ""){ // ตรวจสอบว่ามีข้อความ Error หรือไม่--%>
+    <%--        alert("บันทึกข้อมูลไม่ได้: " + error);--%>
+    <%--        return false; // ไม่ส่งข้อมูลเมื่อมีข้อผิดพลาด--%>
+    <%--    }--%>
+    <%--    return true; // ส่งข้อมูลเมื่อข้อมูลถูกต้อง--%>
+    <%--}--%>
 
 </script>
 

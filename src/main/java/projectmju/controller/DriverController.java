@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import projectmju.model.Busstop;
 import projectmju.model.Driver;
 import projectmju.model.Route;
@@ -29,7 +30,7 @@ public class DriverController {
     }
 
     @RequestMapping("/saveDriver")
-    public String saveDriver (Driver driver, @RequestParam Map<String,String> params){
+    public String saveDriver (Driver driver, @RequestParam Map<String,String> params, RedirectAttributes redirectAttributes){
         Driver driver1 = new Driver();
         driver1.setId_driver(0);
         driver1.setName_driver(params.get("name_driver"));
@@ -37,9 +38,18 @@ public class DriverController {
         driver1.setTel_driver(params.get("tel_driver"));
         driver1.setEmail_driver(params.get("email_driver"));
 
-        driverService.saveDriver(driver1);
-        //System.out.println(route.getId_route());
-        return "redirect:/driver-list";
+        try {
+            driverService.saveDriver(driver1);
+            //System.out.println(route.getId_route());
+            return "redirect:/driver-list";
+        } catch (Exception e) { redirectAttributes.addFlashAttribute("Error", "พบข้อมูลที่ซ้ำกันในฐานข้อมูล");
+            return "redirect:/addDriver";
+        }
+
+
+//        driverService.saveDriver(driver1);
+//        //System.out.println(route.getId_route());
+//        return "redirect:/driver-list";
     }
 
 
@@ -50,7 +60,7 @@ public class DriverController {
     }
 
     @RequestMapping("updateDriver/{id}")
-    public String doUpdateDriver (Driver driver, @RequestParam Map<String,String> params, @PathVariable("id") String driverId){
+    public String doUpdateDriver (Driver driver, @RequestParam Map<String,String> params, @PathVariable("id") String driverId,RedirectAttributes redirectAttributes){
         Driver driver1 = new Driver();
         driver1.setId_driver(Long.parseLong(driverId));
         driver1.setName_driver(params.get("name_driver"));
@@ -58,8 +68,20 @@ public class DriverController {
         driver1.setTel_driver(params.get("tel_driver"));
         driver1.setEmail_driver(params.get("email_driver"));
 
-        driverService.saveDriver(driver1);
-        return "redirect:/driver-list";
+
+        try {
+            driverService.saveDriver(driver1);
+            //System.out.println(route.getId_route());
+            return "redirect:/driver-list";
+//        } catch (Exception e) { redirectAttributes.addFlashAttribute("Error", "โปรดตรวสอบชื่อ-นามสกุล เบอร์โทร และอีเมลว่าซ้ำกับคนขับรถท่านอื่นหรือไม่");
+        } catch (Exception e) { redirectAttributes.addFlashAttribute("Error", " พบข้อมูลที่ซ้ำกันในฐานข้อมูล ");
+
+            return "redirect:/driver/{id}";
+        }
+
+
+//        driverService.saveDriver(driver1);
+//        return "redirect:/driver-list";
     }
 
     @GetMapping("deleteDriver/{id}")

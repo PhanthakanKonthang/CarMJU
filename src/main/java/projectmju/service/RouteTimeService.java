@@ -18,4 +18,6 @@ public interface RouteTimeService {
 
     void deleteRoutetimetable(Routetimetable routetimetable);
 
+    List<Routetimetable> getRoutetimetableByRoute();
+
 }

@@ -20,7 +20,8 @@ public class RouteTimeDaoImpl implements RouteTimeDao{
     @Override
     public List<Routetimetable> getRoutetimetables() {
         Session session = sessionFactory.getCurrentSession();
-        Query<Routetimetable> query = session.createQuery("FROM Routetimetable rt ORDER BY rt.round_no ASC", Routetimetable.class);
+//        Query<Routetimetable> query = session.createQuery("FROM Routetimetable rt ORDER BY rt.round_no ASC", Routetimetable.class);
+        Query<Routetimetable> query = session.createQuery("FROM Routetimetable rt ORDER BY rt.start_time ASC", Routetimetable.class);
 
         List<Routetimetable> routetimetables = query.getResultList();
         for (Routetimetable rt : routetimetables){
@@ -61,5 +62,12 @@ public class RouteTimeDaoImpl implements RouteTimeDao{
     public void deleteRoutetimetable(Routetimetable routetimetable) {
         Session session = sessionFactory.getCurrentSession();
         session.remove(routetimetable);
+    }
+
+    @Override
+    public List<Routetimetable> getRoutetimetableByRoute() {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Routetimetable> query = session.createQuery("FROM Routetimetable rt ORDER BY rt.start_time ASC", Routetimetable.class);
+        return query.getResultList();
     }
 }
